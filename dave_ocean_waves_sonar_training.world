@@ -1,0 +1,221 @@
+<?xml version="1.0"?>
+<!--
+  DAVE sonar training world.
+
+  The wreck is retained as the large complex target. Additional public
+  Gazebo Fuel models are arranged in separate target groups so that sonar
+  images contain distinguishable classes: colored tanks, boxes, a pallet and
+  mossy blocks. The long pipes and colored tanks are simple static SDF targets.
+  Fuel models used here are CC BY 4.0.
+-->
+<sdf version="1.4">
+  <world name="oceans_waves_sonar_training">
+    <scene>
+      <ambient>0.01 0.01 0.01 1.0</ambient>
+      <sky>
+        <clouds>
+          <speed>12</speed>
+        </clouds>
+      </sky>
+      <shadows>1</shadows>
+    </scene>
+    <physics name="1ms" type="ignored">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics"/>
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands"/>
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster"/>
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+    <plugin filename="gz-sim-dvl-system" name="gz::sim::systems::DopplerVelocityLogSystem"/>
+    <plugin filename="multibeam_sonar_system" name="custom::MultibeamSonarSystem"/>
+
+    <spherical_coordinates>
+      <latitude_deg>35.074823</latitude_deg>
+      <longitude_deg>129.084798</longitude_deg>
+    </spherical_coordinates>
+
+    <light type="directional" name="sun1">
+      <pose>50 0 150 0 0 0</pose>
+      <diffuse>1 1 1 1</diffuse>
+      <specular>.1 .1 .1 1</specular>
+      <direction>0.3 0.3 -1</direction>
+      <cast_shadows>false</cast_shadows>
+    </light>
+    <light type="directional" name="sun_diffuse">
+      <pose>-50 0 -150 0 0 0</pose>
+      <diffuse>0.6 0.6 0.6 1</diffuse>
+      <specular>0 0 0 1</specular>
+      <direction>-0.3 -0.3 -1</direction>
+      <cast_shadows>false</cast_shadows>
+    </light>
+    <light type="directional" name="sun_diffuse_1">
+      <pose>-100 500 -20 0 0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>1 1 1 1</specular>
+      <direction>-1 -1 0</direction>
+      <cast_shadows>false</cast_shadows>
+    </light>
+    <light type="directional" name="sun_diffuse_2">
+      <pose>-150 -130 50 0 0 0</pose>
+      <diffuse>0.6 0.6 0.6 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <direction>0.5 0.5 -1</direction>
+      <cast_shadows>false</cast_shadows>
+    </light>
+
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/hmoyen/models/North East Down frame</uri>
+      <pose>0 0 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Coast Water</uri>
+    </include>
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/hmoyen/models/Sunken Ship Distorted</uri>
+      <name>training_wreck</name>
+      <pose>15 2 -16 0 0 1</pose>
+    </include>
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/hmoyen/models/Sand Heightmap</uri>
+      <pose>0 0 -16 0 0 0</pose>
+    </include>
+
+    <!-- Box / crate targets: two sizes and several orientations. -->
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Test box</uri>
+      <name>training_box_01</name>
+      <static>true</static>
+      <pose>35 12 -15.55 0 0 0.15</pose>
+    </include>
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Test box</uri>
+      <name>training_box_02</name>
+      <static>true</static>
+      <pose>39 15 -15.55 0 0 1.0</pose>
+    </include>
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Test box</uri>
+      <name>training_box_03</name>
+      <static>true</static>
+      <pose>42 10 -15.55 0.15 0.1 2.2</pose>
+    </include>
+
+    <!-- Pallet target and small debris cluster. -->
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Pallet_Standard</uri>
+      <name>training_pallet_01</name>
+      <static>true</static>
+      <pose>36 17 -15.65 0 0 0.3</pose>
+    </include>
+
+    <!-- Colored cylindrical tank targets. Static keeps them on the seabed. -->
+    <model name="training_tank_01">
+      <static>true</static>
+      <pose>48 12 -14.95 0 1.5708 0.2</pose>
+      <link name="link">
+        <visual name="body"><geometry><cylinder><radius>0.62</radius><length>2.4</length></cylinder></geometry>
+          <material><ambient>0.34 0.10 0.025 1</ambient><diffuse>0.52 0.16 0.035 1</diffuse><specular>0.28 0.2 0.12 1</specular></material>
+        </visual>
+        <visual name="band_a"><pose>0 0 -0.78 0 0 0</pose><geometry><cylinder><radius>0.66</radius><length>0.10</length></cylinder></geometry>
+          <material><ambient>0.04 0.04 0.04 1</ambient><diffuse>0.07 0.07 0.07 1</diffuse></material>
+        </visual>
+        <visual name="band_b"><pose>0 0 0.78 0 0 0</pose><geometry><cylinder><radius>0.66</radius><length>0.10</length></cylinder></geometry>
+          <material><ambient>0.04 0.04 0.04 1</ambient><diffuse>0.07 0.07 0.07 1</diffuse></material>
+        </visual>
+        <collision name="collision"><geometry><cylinder><radius>0.62</radius><length>2.4</length></cylinder></geometry></collision>
+      </link>
+    </model>
+    <model name="training_tank_02">
+      <static>true</static>
+      <pose>53 16 -15.07 0 1.5708 1.4</pose>
+      <link name="link">
+        <visual name="body"><geometry><cylinder><radius>0.48</radius><length>1.8</length></cylinder></geometry>
+          <material><ambient>0.08 0.20 0.26 1</ambient><diffuse>0.12 0.36 0.48 1</diffuse><specular>0.3 0.35 0.4 1</specular></material>
+        </visual>
+        <visual name="band"><pose>0 0 0 0 0 0</pose><geometry><cylinder><radius>0.51</radius><length>0.08</length></cylinder></geometry>
+          <material><ambient>0.75 0.36 0.04 1</ambient><diffuse>0.95 0.48 0.05 1</diffuse></material>
+        </visual>
+        <collision name="collision"><geometry><cylinder><radius>0.48</radius><length>1.8</length></cylinder></geometry></collision>
+      </link>
+    </model>
+    <model name="training_tank_03">
+      <static>true</static>
+      <pose>58 10 -14.83 0 1.5708 0.0</pose>
+      <link name="link">
+        <visual name="body"><geometry><cylinder><radius>0.72</radius><length>3.0</length></cylinder></geometry>
+          <material><ambient>0.16 0.18 0.19 1</ambient><diffuse>0.24 0.28 0.30 1</diffuse><specular>0.42 0.42 0.42 1</specular></material>
+        </visual>
+        <collision name="collision"><geometry><cylinder><radius>0.72</radius><length>3.0</length></cylinder></geometry></collision>
+      </link>
+    </model>
+
+    <!-- Block / rock-like targets. -->
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/hmoyen/models/mossy_cinder_block</uri>
+      <name>training_block_01</name>
+      <static>true</static>
+      <pose>35 -16 -15.65 0.05 0.15 0.1</pose>
+    </include>
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/hmoyen/models/mossy_cinder_block</uri>
+      <name>training_block_02</name>
+      <static>true</static>
+      <pose>41 -20 -15.65 0.2 0.0 1.2</pose>
+    </include>
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/hmoyen/models/mossy_cinder_block</uri>
+      <name>training_block_03</name>
+      <static>true</static>
+      <pose>47 -14 -15.65 0.0 0.25 2.0</pose>
+    </include>
+
+    <!-- Long cylindrical pipe targets, deliberately crossing at two angles. -->
+    <model name="training_pipe_01">
+      <static>true</static>
+      <pose>48 21 -15.27 0 1.5708 0.25</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry><cylinder><radius>0.28</radius><length>8.0</length></cylinder></geometry>
+          <material>
+            <ambient>0.08 0.12 0.14 1</ambient>
+            <diffuse>0.12 0.18 0.2 1</diffuse>
+            <specular>0.25 0.25 0.25 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry><cylinder><radius>0.28</radius><length>8.0</length></cylinder></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="training_pipe_02">
+      <static>true</static>
+      <pose>58 20 -15.13 0 1.5708 -0.65</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry><cylinder><radius>0.42</radius><length>6.0</length></cylinder></geometry>
+          <material>
+            <ambient>0.20 0.12 0.05 1</ambient>
+            <diffuse>0.30 0.18 0.07 1</diffuse>
+            <specular>0.3 0.25 0.2 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry><cylinder><radius>0.42</radius><length>6.0</length></cylinder></geometry>
+        </collision>
+      </link>
+    </model>
+
+    <plugin filename="gz-sim-buoyancy-system" name="gz::sim::systems::Buoyancy">
+      <graded_buoyancy>
+        <default_density>1025</default_density>
+        <density_change>
+          <above_depth>0</above_depth>
+          <density>1</density>
+        </density_change>
+      </graded_buoyancy>
+    </plugin>
+  </world>
+</sdf>
