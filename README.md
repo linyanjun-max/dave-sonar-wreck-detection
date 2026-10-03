@@ -91,6 +91,12 @@ bash ./run_sonar_yolo_realtime.sh --rate 1 --imgsz 512 --conf 0.47 --device auto
 - 原训练数据没有随仓库发布。训练数据来自 Roboflow 项目，数据集页面标注为 CC BY 4.0；见下方署名说明。
 - 这是基础实验模型，可能漏检或误检。测试前应在 RViz 中观察真实输出，不要将它视作安全/导航系统。
 
+## 第一阶段成果视频
+
+[`media/test_shipwreck.mp4`](media/test_shipwreck.mp4) 展示了接入 YOLO 后对沉船的成功识别。训练标注中沉船标为 `Shipwreck`；沙丘属于空标签背景，因此扫描到沙丘时模型不会触发目标识别/标注。这是当前数据集与类别定义下的行为，不代表模型理解了“沙丘”这一语义类别。
+
+视频通过 Git LFS 存储。克隆仓库后需要安装 Git LFS 并执行 `git lfs pull` 才能取回视频内容；GitHub 的普通 Git 单文件限制为 100 MiB，而该视频约 169.5 MiB。LFS 下载会计入仓库所有者的 Git LFS 带宽额度。
+
 ## 数据与第三方内容署名
 
 训练数据集：**My First Project**, `nothingbeatyous-workspace`, version 1，Roboflow Universe，CC BY 4.0：
