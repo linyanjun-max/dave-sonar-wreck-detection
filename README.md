@@ -2,7 +2,13 @@
 
 中文 | [Русский](README.ru.md)
 
+![ROS 2 Jazzy](https://img.shields.io/badge/ROS_2-Jazzy-22314E?logo=ros&logoColor=white)
+![YOLOv8 segmentation](https://img.shields.io/badge/YOLOv8-segmentation-8A2BE2)
+![Perception only](https://img.shields.io/badge/control-read--only-success)
+
 本项目整理了 DAVE / BlueROV2 多波束声呐仿真、RViz 可视化、网页虚拟摇杆操作，以及 YOLOv8-seg 声呐沉船实时识别的必要文件。识别节点只订阅声呐图像并发布带标注图像，**不会发布摇杆、MAVROS 或推进器控制指令**。
+
+> **项目阶段：** 第一阶段完成声呐沉船识别验证。演示视频和单帧识别结果见下方。
 
 ## 是否需要激活 Python 虚拟环境？
 
@@ -91,9 +97,35 @@ bash ./run_sonar_yolo_realtime.sh --rate 1 --imgsz 512 --conf 0.47 --device auto
 - 原训练数据没有随仓库发布。训练数据来自 Roboflow 项目，数据集页面标注为 CC BY 4.0；见下方署名说明。
 - 这是基础实验模型，可能漏检或误检。测试前应在 RViz 中观察真实输出，不要将它视作安全/导航系统。
 
-## 第一阶段成果视频
+## 第一阶段成果与声呐识别示例
 
-[`media/test_shipwreck.mp4`](media/test_shipwreck.mp4) 展示了接入 YOLO 后对沉船的成功识别。训练标注中沉船标为 `Shipwreck`；沙丘属于空标签背景，因此扫描到沙丘时模型不会触发目标识别/标注。这是当前数据集与类别定义下的行为，不代表模型理解了“沙丘”这一语义类别。
+### 沉船：触发 `Shipwreck` 分割
+
+以下是 YOLO 对沉船声呐图像的识别输出，掩膜和置信度由模型生成。
+
+<table>
+  <tr>
+    <td align="center"><img src="docs/images/shipwreck-detection-01.jpg" width="240" alt="YOLO 沉船识别样例 1"><br><sub>样例 1 · 置信度 0.83</sub></td>
+    <td align="center"><img src="docs/images/shipwreck-detection-02.jpg" width="240" alt="YOLO 沉船识别样例 2"><br><sub>样例 2 · 多个区域触发</sub></td>
+    <td align="center"><img src="docs/images/shipwreck-detection-03.jpg" width="240" alt="YOLO 沉船识别样例 3"><br><sub>样例 3 · 置信度 0.84</sub></td>
+  </tr>
+</table>
+
+### 沙丘：空标签背景，不触发检测
+
+训练标注中沉船标为 `Shipwreck`，沙丘样本则作为空标签背景。因此这些沙丘声呐帧没有检测框/分割掩膜。这表示模型没有输出已训练类别，并不代表模型单独识别或理解了“沙丘”。
+
+<table>
+  <tr>
+    <td align="center"><img src="docs/images/dune-background-01.jpg" width="240" alt="无检测输出的沙丘声呐样例 1"><br><sub>沙丘背景 · 无检测输出</sub></td>
+    <td align="center"><img src="docs/images/dune-background-02.jpg" width="240" alt="无检测输出的沙丘声呐样例 2"><br><sub>沙丘背景 · 无检测输出</sub></td>
+    <td align="center"><img src="docs/images/dune-background-03.jpg" width="240" alt="无检测输出的沙丘声呐样例 3"><br><sub>沙丘背景 · 无检测输出</sub></td>
+  </tr>
+</table>
+
+### 演示视频
+
+[`media/test_shipwreck.mp4`](media/test_shipwreck.mp4) 展示了接入 YOLO 后实时识别沉船的过程。
 
 视频通过 Git LFS 存储。克隆仓库后需要安装 Git LFS 并执行 `git lfs pull` 才能取回视频内容；GitHub 的普通 Git 单文件限制为 100 MiB，而该视频约 169.5 MiB。LFS 下载会计入仓库所有者的 Git LFS 带宽额度。
 
