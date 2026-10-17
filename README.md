@@ -61,6 +61,22 @@ bash ./open_dave_rviz.sh
 | 右摇杆上下/左右 | 上浮下潜 / 左右转向 |
 | B / X | 增大 / 减小推力输出 |
 
+## 静态声呐数据采集（Pipe / Box）
+
+仓库附带独立的 [`sonar_collection_static.world`](sonar_collection_static.world)：场景中只有静态海床、箱体、管道和固定多波束声呐，不启动潜水器、ArduSub、MAVROS 或控制器。启动脚本会让声呐朝向所选物体，打开 Gazebo 与 RViz2，并在终端按键采集当前声呐帧。该脚本只读取图像，不会发送推进器指令。
+
+### 依赖与启动
+
+在 WSL Ubuntu 24.04 中，需要已安装 ROS 2 Jazzy、DAVE `dave_demos` / `dave_multibeam_sonar_demo` 包以及多波束声呐系统插件。图像采集 Python 环境还需要 `rclpy`、`sensor_msgs`、NumPy 和 OpenCV；无需 YOLO、PyTorch 或 CUDA。脚本默认查找 `~/dave_ws`、`~/dave_ws_official` 和 `~/dave_ws/install/multibeam_sonar_system`。移植到其他电脑时，请按本机安装位置修改 [`run_static_sonar_collection.sh`](run_static_sonar_collection.sh) 中的 ROS/DAVE source 路径及 `GZ_SIM_SYSTEM_PLUGIN_PATH`；并确保 `dave_multibeam_sonar_demo` 已安装，以提供 RViz 配置。WSL 图形桌面需可用（例如 WSLg）。
+
+```bash
+bash ./run_static_sonar_collection.sh
+```
+
+启动后选择 `1`（Pipe）或 `2`（Box/Crate）。脚本会自动发现独立声呐实际发布的 `/.../multibeam_sonar/sonar_image` 话题，然后打开 RViz2 和采集界面。按 `S` 保存当前帧，按 `Q` 结束；在启动终端按 `Ctrl+C` 也会结束并关闭场景。图片分别保存在 `sonar_dataset/pipe/` 或 `sonar_dataset/box_crate/`，`sonar_dataset/manifest.csv` 记录类别、话题、编码、尺寸和时间戳。新类别可在 [`collect_sonar_dataset.py`](collect_sonar_dataset.py) 的 `CLASS_CHOICES` 中添加，并在启动脚本中增加对应的声呐位姿分支。
+
+world 使用 Gazebo Fuel 上的 Coast Water、Sand Heightmap 和 Test box 资源；首次运行需要可访问 Fuel。Pipe 是 world 文件中定义的静态圆柱体。第三方资源仍受其各自许可约束。
+
 ## YOLO 实时声呐识别
 
 先启动 DAVE 世界并确认声呐图像话题正在发布。使用当前已经装好 YOLO、CUDA 和 ROS Python 依赖的虚拟环境启动（脚本会自动激活 `~/venv-dave-stage1`）：
