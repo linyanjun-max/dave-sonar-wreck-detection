@@ -151,6 +151,29 @@ bash ./run_sonar_yolo_realtime.sh --rate 1 --imgsz 512 --conf 0.47 --device auto
 
 Полный набор находится в [`datasets/sonar_database-yolov8/`](datasets/sonar_database-yolov8/) и включает splits `train`, `valid`, `test`, каталоги images/labels, конфигурацию классов и сведения об источнике Roboflow. Всего **1 119 изображений** (836 train, 192 valid, 91 test). Идентификаторы классов: `0: box_crate`, `1: pipe`, `2: shipwreck`. По числу изображений, содержащих класс: box_crate — 270, pipe — 295, shipwreck — 462; дополнительно есть 92 фоновых изображения с пустыми метками. Фон не является отдельным классом. Размер набора около 45,7 МБ; он включён в репозиторий напрямую.
 
+### Примеры сонарных изображений труб и ящиков
+
+Ниже представлены по три исходных сонарных кадра из валидационной выборки для каждого объекта. Соответствующие полигоны YOLOv8 segmentation находятся в одноимённых файлах `valid/labels/*.txt`; контуры разметки не накладывались на эти изображения.
+
+<table>
+  <tr>
+    <th colspan="3">Pipe (подводная труба)</th>
+  </tr>
+  <tr>
+    <td align="center"><img src="datasets/sonar_database-yolov8/valid/images/pipe_00014_png_jpg.rf.2e88e1e4d04a095cad1171054400e1a3.jpg" width="240" alt="Сонарное изображение трубы 1"><br><sub>Pipe · 1</sub></td>
+    <td align="center"><img src="datasets/sonar_database-yolov8/valid/images/pipe_00125_png_jpg.rf.c946d39ad279ffb7762dfb4e3286c315.jpg" width="240" alt="Сонарное изображение трубы 2"><br><sub>Pipe · 2</sub></td>
+    <td align="center"><img src="datasets/sonar_database-yolov8/valid/images/pipe_00192_png_jpg.rf.c1685a49c87c3d859a168791ab150704.jpg" width="240" alt="Сонарное изображение трубы 3"><br><sub>Pipe · 3</sub></td>
+  </tr>
+  <tr>
+    <th colspan="3">Box / Crate (ящик)</th>
+  </tr>
+  <tr>
+    <td align="center"><img src="datasets/sonar_database-yolov8/valid/images/box_crate_00026_png_jpg.rf.c09753f8261cd67a2f6f13e4e3ec1bd2.jpg" width="240" alt="Сонарное изображение ящика 1"><br><sub>Box/Crate · 1</sub></td>
+    <td align="center"><img src="datasets/sonar_database-yolov8/valid/images/box_crate_00123_png_jpg.rf.cc7bb6fdd34994a0f4267702ee7ef138.jpg" width="240" alt="Сонарное изображение ящика 2"><br><sub>Box/Crate · 2</sub></td>
+    <td align="center"><img src="datasets/sonar_database-yolov8/valid/images/box_crate_00245_png_jpg.rf.9b3dcc44c5f401f002239e3d638cfac3.jpg" width="240" alt="Сонарное изображение ящика 3"><br><sub>Box/Crate · 3</sub></td>
+  </tr>
+</table>
+
 Пути в `data.yaml` настроены относительно этой директории: `train/images`, `valid/images`, `test/images`. Если переместить набор отдельно после клонирования, обновите соответствующие пути.
 
 Набор экспортирован из **My First Project**, `nothingbeatyous-workspace`, version 2 на Roboflow Universe под лицензией CC BY 4.0: [страница набора version 2](https://universe.roboflow.com/nothingbeatyous-workspace/my-first-project-4vdi4/dataset/2). При повторном распространении сохраните сведения об источнике и соблюдайте требования атрибуции CC BY 4.0. Наличие полигональных меток не означает, что их качество прошло независимую проверку.

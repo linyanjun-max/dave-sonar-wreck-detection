@@ -151,6 +151,29 @@ bash ./run_sonar_yolo_realtime.sh --rate 1 --imgsz 512 --conf 0.47 --device auto
 
 完整数据集位于 [`datasets/sonar_database-yolov8/`](datasets/sonar_database-yolov8/)，包含 `train`、`valid`、`test` 三个 split 的 images/labels、类别配置和 Roboflow 来源说明。共 **1,119 张图像**（836 train、192 valid、91 test），类别 ID 与名称为：`0: box_crate`、`1: pipe`、`2: shipwreck`。按包含类别的图像计数：box_crate 270 张、pipe 295 张、shipwreck 462 张；另有 92 张空标签背景图。背景是空标签，不是一个额外类别。数据集约 45.7 MB，随仓库直接提供。
 
+### 管道与箱体声呐图示例
+
+以下各展示 3 张验证集中的原始声呐图像。对应的 YOLOv8 segmentation 多边形标注保存在同名 `valid/labels/*.txt` 文件中；图片本身未叠加或伪造标注轮廓。
+
+<table>
+  <tr>
+    <th colspan="3">Pipe（水下管道）</th>
+  </tr>
+  <tr>
+    <td align="center"><img src="datasets/sonar_database-yolov8/valid/images/pipe_00014_png_jpg.rf.2e88e1e4d04a095cad1171054400e1a3.jpg" width="240" alt="Pipe sonar sample 1"><br><sub>Pipe · 1</sub></td>
+    <td align="center"><img src="datasets/sonar_database-yolov8/valid/images/pipe_00125_png_jpg.rf.c946d39ad279ffb7762dfb4e3286c315.jpg" width="240" alt="Pipe sonar sample 2"><br><sub>Pipe · 2</sub></td>
+    <td align="center"><img src="datasets/sonar_database-yolov8/valid/images/pipe_00192_png_jpg.rf.c1685a49c87c3d859a168791ab150704.jpg" width="240" alt="Pipe sonar sample 3"><br><sub>Pipe · 3</sub></td>
+  </tr>
+  <tr>
+    <th colspan="3">Box / Crate（箱体）</th>
+  </tr>
+  <tr>
+    <td align="center"><img src="datasets/sonar_database-yolov8/valid/images/box_crate_00026_png_jpg.rf.c09753f8261cd67a2f6f13e4e3ec1bd2.jpg" width="240" alt="Box or crate sonar sample 1"><br><sub>Box/Crate · 1</sub></td>
+    <td align="center"><img src="datasets/sonar_database-yolov8/valid/images/box_crate_00123_png_jpg.rf.cc7bb6fdd34994a0f4267702ee7ef138.jpg" width="240" alt="Box or crate sonar sample 2"><br><sub>Box/Crate · 2</sub></td>
+    <td align="center"><img src="datasets/sonar_database-yolov8/valid/images/box_crate_00245_png_jpg.rf.9b3dcc44c5f401f002239e3d638cfac3.jpg" width="240" alt="Box or crate sonar sample 3"><br><sub>Box/Crate · 3</sub></td>
+  </tr>
+</table>
+
 `data.yaml` 的路径已调整为相对该目录的 `train/images`、`valid/images`、`test/images`，以便在克隆后的仓库中直接定位。若将数据集单独移动到其他目录，请据此更新 `data.yaml` 中的路径。
 
 此数据集由 Roboflow Universe 的 **My First Project**, `nothingbeatyous-workspace`, version 2 导出，许可为 CC BY 4.0：[version 2 数据集页面](https://universe.roboflow.com/nothingbeatyous-workspace/my-first-project-4vdi4/dataset/2)。再分发时请保留数据集内的来源说明，并遵守 CC BY 4.0 署名要求。包含分割标签不代表这些标签或模型已通过独立质量审查。
