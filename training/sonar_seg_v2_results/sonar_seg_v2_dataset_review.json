@@ -1,0 +1,249 @@
+{
+  "video": "D:\\桌面\\DAVE\\sonar_seg_v2_results\\sonar_seg_v2_dataset_review.mp4",
+  "weights": "D:\\桌面\\DAVE\\sonar_seg_v2_results\\best.pt",
+  "dataset": "D:\\桌面\\DAVE\\dave-sonar-wreck-detection\\datasets\\sonar_database-yolov8",
+  "images_processed": 1119,
+  "fps": 8.0,
+  "max_consecutive_frames_per_category": 20,
+  "confidence_threshold": 0.25,
+  "predicted_primary_category_counts": {
+    "background_no_detection": 93,
+    "box_crate": 270,
+    "pipe": 295,
+    "shipwreck": 461
+  },
+  "block_order": [
+    {
+      "category": "shipwreck",
+      "frames": 20
+    },
+    {
+      "category": "pipe",
+      "frames": 20
+    },
+    {
+      "category": "shipwreck",
+      "frames": 20
+    },
+    {
+      "category": "box_crate",
+      "frames": 20
+    },
+    {
+      "category": "pipe",
+      "frames": 20
+    },
+    {
+      "category": "box_crate",
+      "frames": 20
+    },
+    {
+      "category": "background_no_detection",
+      "frames": 20
+    },
+    {
+      "category": "box_crate",
+      "frames": 20
+    },
+    {
+      "category": "pipe",
+      "frames": 20
+    },
+    {
+      "category": "shipwreck",
+      "frames": 20
+    },
+    {
+      "category": "box_crate",
+      "frames": 20
+    },
+    {
+      "category": "background_no_detection",
+      "frames": 20
+    },
+    {
+      "category": "shipwreck",
+      "frames": 20
+    },
+    {
+      "category": "pipe",
+      "frames": 20
+    },
+    {
+      "category": "background_no_detection",
+      "frames": 20
+    },
+    {
+      "category": "pipe",
+      "frames": 20
+    },
+    {
+      "category": "box_crate",
+      "frames": 20
+    },
+    {
+      "category": "pipe",
+      "frames": 20
+    },
+    {
+      "category": "box_crate",
+      "frames": 20
+    },
+    {
+      "category": "background_no_detection",
+      "frames": 20
+    },
+    {
+      "category": "pipe",
+      "frames": 20
+    },
+    {
+      "category": "box_crate",
+      "frames": 20
+    },
+    {
+      "category": "pipe",
+      "frames": 20
+    },
+    {
+      "category": "box_crate",
+      "frames": 20
+    },
+    {
+      "category": "background_no_detection",
+      "frames": 13
+    },
+    {
+      "category": "pipe",
+      "frames": 20
+    },
+    {
+      "category": "shipwreck",
+      "frames": 20
+    },
+    {
+      "category": "pipe",
+      "frames": 20
+    },
+    {
+      "category": "box_crate",
+      "frames": 20
+    },
+    {
+      "category": "shipwreck",
+      "frames": 20
+    },
+    {
+      "category": "pipe",
+      "frames": 20
+    },
+    {
+      "category": "shipwreck",
+      "frames": 20
+    },
+    {
+      "category": "box_crate",
+      "frames": 20
+    },
+    {
+      "category": "shipwreck",
+      "frames": 20
+    },
+    {
+      "category": "box_crate",
+      "frames": 20
+    },
+    {
+      "category": "pipe",
+      "frames": 20
+    },
+    {
+      "category": "box_crate",
+      "frames": 20
+    },
+    {
+      "category": "shipwreck",
+      "frames": 20
+    },
+    {
+      "category": "pipe",
+      "frames": 20
+    },
+    {
+      "category": "shipwreck",
+      "frames": 20
+    },
+    {
+      "category": "pipe",
+      "frames": 20
+    },
+    {
+      "category": "shipwreck",
+      "frames": 20
+    },
+    {
+      "category": "pipe",
+      "frames": 15
+    },
+    {
+      "category": "shipwreck",
+      "frames": 20
+    },
+    {
+      "category": "box_crate",
+      "frames": 20
+    },
+    {
+      "category": "shipwreck",
+      "frames": 20
+    },
+    {
+      "category": "box_crate",
+      "frames": 10
+    },
+    {
+      "category": "shipwreck",
+      "frames": 20
+    },
+    {
+      "category": "shipwreck",
+      "frames": 20
+    },
+    {
+      "category": "shipwreck",
+      "frames": 20
+    },
+    {
+      "category": "shipwreck",
+      "frames": 20
+    },
+    {
+      "category": "shipwreck",
+      "frames": 20
+    },
+    {
+      "category": "shipwreck",
+      "frames": 20
+    },
+    {
+      "category": "shipwreck",
+      "frames": 20
+    },
+    {
+      "category": "shipwreck",
+      "frames": 20
+    },
+    {
+      "category": "shipwreck",
+      "frames": 20
+    },
+    {
+      "category": "shipwreck",
+      "frames": 20
+    },
+    {
+      "category": "shipwreck",
+      "frames": 1
+    }
+  ]
+}

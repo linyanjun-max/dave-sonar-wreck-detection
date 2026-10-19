@@ -1,0 +1,17 @@
+{
+  "epochs_run": 194,
+  "best_epoch": 84,
+  "wall_clock_hours": 2.85,
+  "active_train_minutes": 48.6,
+  "median_epoch_seconds": 15.0,
+  "val_best": {
+    "metrics/precision(B)": 0.8309,
+    "metrics/recall(B)": 0.8267,
+    "metrics/mAP50(B)": 0.818,
+    "metrics/mAP50-95(B)": 0.5269,
+    "metrics/precision(M)": 0.8261,
+    "metrics/recall(M)": 0.8196,
+    "metrics/mAP50(M)": 0.8141,
+    "metrics/mAP50-95(M)": 0.3981
+  }
+}

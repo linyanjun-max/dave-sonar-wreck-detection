@@ -1,0 +1,32 @@
+{
+  "box_crate": {
+    "box_p": 0.989,
+    "box_r": 1.0,
+    "box_map50": 0.995,
+    "box_map": 0.642,
+    "mask_p": 0.987,
+    "mask_r": 1.0,
+    "mask_map50": 0.995,
+    "mask_map": 0.682
+  },
+  "pipe": {
+    "box_p": 0.971,
+    "box_r": 1.0,
+    "box_map50": 0.995,
+    "box_map": 0.77,
+    "mask_p": 0.97,
+    "mask_r": 1.0,
+    "mask_map50": 0.995,
+    "mask_map": 0.493
+  },
+  "shipwreck": {
+    "box_p": 0.608,
+    "box_r": 0.585,
+    "box_map50": 0.606,
+    "box_map": 0.386,
+    "mask_p": 0.595,
+    "mask_r": 0.585,
+    "mask_map50": 0.642,
+    "mask_map": 0.241
+  }
+}

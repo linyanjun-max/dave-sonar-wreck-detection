@@ -178,6 +178,46 @@ bash ./run_sonar_yolo_realtime.sh --rate 1 --imgsz 512 --conf 0.47 --device auto
 
 此数据集由 Roboflow Universe 的 **My First Project**, `nothingbeatyous-workspace`, version 2 导出，许可为 CC BY 4.0：[version 2 数据集页面](https://universe.roboflow.com/nothingbeatyous-workspace/my-first-project-4vdi4/dataset/2)。再分发时请保留数据集内的来源说明，并遵守 CC BY 4.0 署名要求。包含分割标签不代表这些标签或模型已通过独立质量审查。
 
+## 第二阶段模型与训练结果
+
+新版三类分割权重单独作为 [`models/sonar_seg_v2_best.pt`](models/sonar_seg_v2_best.pt) 提供；原有沉船模型未覆盖。完整训练交付物（权重副本、参数、曲线、混淆矩阵、测试集预测图、推理脚本与评估视频）位于 [`training/sonar_seg_v2_results/`](training/sonar_seg_v2_results/)。训练摘要见[指标说明](training/sonar_seg_v2_results/00_指标汇总.md)，完整参数见 [`args.yaml`](training/sonar_seg_v2_results/args.yaml)。
+
+### 测试集表现
+
+模型为预训练 `yolov8n-seg`，输入尺寸 512；训练在 RTX 4060 Laptop 上进行，best checkpoint 为 epoch 84（训练于 epoch 194 早停）。在 91 张测试图像、109 个实例上，整体 Box mAP50 为 **0.865**，Mask mAP50 为 **0.877**；Mask mAP50–95 为 **0.472**。权重已在本项目 RTX 4070 环境重新加载，并复跑同一测试集，整体指标与随附结果一致。以下是分类别结果：
+
+| 类别 | 实例 | Box mAP50 | Mask mAP50 | Mask mAP50–95 |
+|---|---:|---:|---:|---:|
+| box_crate | 27 | 0.995 | 0.995 | 0.682 |
+| pipe | 29 | 0.995 | 0.995 | 0.493 |
+| shipwreck | 53 | 0.606 | 0.642 | 0.241 |
+
+箱体和管道在这份测试集上分数很高；沉船仍是主要短板。测试集规模较小，尤其需要扩大背景与不同场景的独立测试，不能仅凭这些分数推断真实环境泛化能力。
+
+### 混淆矩阵与训练曲线
+
+下方混淆矩阵横轴是真实类别，纵轴是模型预测类别；`background` 是未匹配到目标的背景项，不是训练中的第四个类别。归一化矩阵按真实类别列归一化。固定置信度/IoU 下的混淆矩阵用于观察当前阈值的错分与背景误报；mAP 则在多个置信度阈值上汇总，因此不应要求矩阵计数与表格中的 P/R 完全换算一致。
+
+在测试矩阵中，箱体和管道的目标实例都落在各自的正确类别；沉船仍有漏检。更显眼的问题是背景列出现了不少前景预测，且大多被判为沉船：当前 6 张纯背景测试图不足以证明背景误报已解决，需要补充更多多样化的空标签声呐图，并单独观察误报。
+
+<table>
+  <tr>
+    <td align="center"><img src="training/sonar_seg_v2_results/test/confusion_matrix.png" width="420" alt="测试集混淆矩阵计数"><br><sub>测试集混淆矩阵（实例计数）</sub></td>
+    <td align="center"><img src="training/sonar_seg_v2_results/test/confusion_matrix_normalized.png" width="420" alt="测试集归一化混淆矩阵"><br><sub>按真实类别归一化</sub></td>
+  </tr>
+</table>
+
+分类别 mAP 图显示箱体/管道较强而沉船明显偏低。训练曲线中训练损失持续下降，但验证集 box、seg 与 dfl 损失在约 epoch 80–100 后总体回升，提示继续训练可能过拟合；选择 epoch 84 的 best checkpoint 是合理的。曲线中的小幅波动也说明这些测试结果仍有抽样不确定性。
+
+<table>
+  <tr>
+    <td align="center"><img src="training/sonar_seg_v2_results/test_per_class_map.png" width="520" alt="测试集分类别 mAP 图"><br><sub>测试集分类别 Box/Mask mAP</sub></td>
+    <td align="center"><img src="training/sonar_seg_v2_results/训练曲线_results.png" width="720" alt="训练和验证曲线"><br><sub>194 个 epoch 的训练与验证曲线</sub></td>
+  </tr>
+</table>
+
+完整数据集推理视频 [sonar_seg_v2_dataset_review.mp4](training/sonar_seg_v2_results/sonar_seg_v2_dataset_review.mp4) 遍历了 1,119 张图像；按最高置信度预测类别随机排列，同一类别每段最多 20 帧，并包含背景/未检出段。统计与分段顺序见 [`sonar_seg_v2_dataset_review.json`](training/sonar_seg_v2_results/sonar_seg_v2_dataset_review.json)。背景/未检出是模型没有输出目标的结果，其中既有真实背景，也可能包含漏检。
+
 ## 数据与第三方内容署名
 
 第一阶段模型基于 **My First Project** version 1 训练（Roboflow Universe，CC BY 4.0）：[version 1 数据集页面](https://universe.roboflow.com/nothingbeatyous-workspace/my-first-project-4vdi4/dataset/1)。第二阶段合并后的标注数据集为 version 2，已随仓库发布，见上方链接。依 CC BY 4.0 要求保留署名、许可链接并说明修改/衍生；若再分发数据或模型，请同时提供本说明。
@@ -186,4 +226,4 @@ bash ./run_sonar_yolo_realtime.sh --rate 1 --imgsz 512 --conf 0.47 --device auto
 
 ## 内容范围
 
-仓库包含运行脚本、世界/RViz 配置、实时识别代码、模型权重、阶段性演示视频，以及第二阶段完整的 YOLOv8 segmentation 数据集。虚拟环境、训练日志、其他视频、RL 检查点和用户机器上的绝对路径配置不包含在内。
+仓库包含运行脚本、世界/RViz 配置、实时识别代码、阶段模型权重、阶段性演示视频、第二阶段完整 YOLOv8 segmentation 数据集和新版模型训练结果。虚拟环境、RL 检查点和用户机器上的绝对路径配置不包含在内。
