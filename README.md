@@ -110,7 +110,7 @@ bash ./run_sonar_yolo_realtime.sh --rate 1 --imgsz 512 --conf 0.47 --device auto
 ## 模型与限制
 
 - 权重：[`models/shipwreck_seg_v1-5_best.pt`](models/shipwreck_seg_v1-5_best.pt)，YOLOv8 分割模型，类别只有 `shipwreck`。未检出沉船不等同于识别出一个明确的“背景类别”。
-- 原训练数据没有随仓库发布。训练数据来自 Roboflow 项目，数据集页面标注为 CC BY 4.0；见下方署名说明。
+- 第一阶段权重对应 version 1 训练数据；仓库现已附带 version 2 的完整标注数据集。两者均来自 Roboflow 项目，许可为 CC BY 4.0；见下方署名说明。
 - 这是基础实验模型，可能漏检或误检。测试前应在 RViz 中观察真实输出，不要将它视作安全/导航系统。
 
 ## 第一阶段成果与声呐识别示例
@@ -145,13 +145,22 @@ bash ./run_sonar_yolo_realtime.sh --rate 1 --imgsz 512 --conf 0.47 --device auto
 
 视频通过 Git LFS 存储。克隆仓库后需要安装 Git LFS 并执行 `git lfs pull` 才能取回视频内容；GitHub 的普通 Git 单文件限制为 100 MiB，而该视频约 169.5 MiB。LFS 下载会计入仓库所有者的 Git LFS 带宽额度。
 
+## 第二阶段：动态声呐采集与多类分割数据集
+
+第二阶段将识别范围从沉船扩展到箱体（`box_crate`）和管道（`pipe`）。这些新增物体的声呐图像通过操控潜水器在仿真场景中动态移动、改变观察位置和朝向进行采集；不是用固定在单一位置的声呐头定点采集。图像已完成 YOLOv8 segmentation 多边形标注，并与先前的沉船及空标签背景样本合并。
+
+完整数据集位于 [`datasets/sonar_database-yolov8/`](datasets/sonar_database-yolov8/)，包含 `train`、`valid`、`test` 三个 split 的 images/labels、类别配置和 Roboflow 来源说明。共 **1,119 张图像**（836 train、192 valid、91 test），类别 ID 与名称为：`0: box_crate`、`1: pipe`、`2: shipwreck`。按包含类别的图像计数：box_crate 270 张、pipe 295 张、shipwreck 462 张；另有 92 张空标签背景图。背景是空标签，不是一个额外类别。数据集约 45.7 MB，随仓库直接提供。
+
+`data.yaml` 的路径已调整为相对该目录的 `train/images`、`valid/images`、`test/images`，以便在克隆后的仓库中直接定位。若将数据集单独移动到其他目录，请据此更新 `data.yaml` 中的路径。
+
+此数据集由 Roboflow Universe 的 **My First Project**, `nothingbeatyous-workspace`, version 2 导出，许可为 CC BY 4.0：[version 2 数据集页面](https://universe.roboflow.com/nothingbeatyous-workspace/my-first-project-4vdi4/dataset/2)。再分发时请保留数据集内的来源说明，并遵守 CC BY 4.0 署名要求。包含分割标签不代表这些标签或模型已通过独立质量审查。
+
 ## 数据与第三方内容署名
 
-训练数据集：**My First Project**, `nothingbeatyous-workspace`, version 1，Roboflow Universe，CC BY 4.0：
-[数据集页面](https://universe.roboflow.com/nothingbeatyous-workspace/my-first-project-4vdi4/dataset/1)。模型由该数据集训练得到。依 CC BY 4.0 要求保留署名、许可链接并说明修改/衍生；若再分发数据或模型，请同时提供本说明。
+第一阶段模型基于 **My First Project** version 1 训练（Roboflow Universe，CC BY 4.0）：[version 1 数据集页面](https://universe.roboflow.com/nothingbeatyous-workspace/my-first-project-4vdi4/dataset/1)。第二阶段合并后的标注数据集为 version 2，已随仓库发布，见上方链接。依 CC BY 4.0 要求保留署名、许可链接并说明修改/衍生；若再分发数据或模型，请同时提供本说明。
 
 场景文件引用了 DAVE / Fuel 的第三方仿真资源；请同时遵守各资源原始仓库与模型文件中的许可。DAVE、ROS 2、Gazebo、ArduPilot、Ultralytics 及 PyTorch 均为各自项目所有，本仓库不重新许可这些第三方软件。项目自有代码的独立许可尚未指定。
 
 ## 内容范围
 
-仓库只保留运行所需的脚本、世界/RViz 配置、实时识别代码、模型权重和 `media/test_shipwreck.mp4` 这一阶段性演示视频；不包含虚拟环境、原始数据集、训练日志、其他视频、RL 检查点或用户机器上的绝对路径配置。
+仓库包含运行脚本、世界/RViz 配置、实时识别代码、模型权重、阶段性演示视频，以及第二阶段完整的 YOLOv8 segmentation 数据集。虚拟环境、训练日志、其他视频、RL 检查点和用户机器上的绝对路径配置不包含在内。

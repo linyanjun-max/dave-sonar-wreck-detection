@@ -1,0 +1,13 @@
+train: train/images
+val: valid/images
+test: test/images
+
+nc: 3
+names: ['box_crate', 'pipe', 'shipwreck']
+
+roboflow:
+  workspace: nothingbeatyous-workspace
+  project: my-first-project-4vdi4
+  version: 2
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/nothingbeatyous-workspace/my-first-project-4vdi4/dataset/2
