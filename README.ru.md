@@ -174,6 +174,29 @@ bash ./run_sonar_yolo_realtime.sh --rate 1 --imgsz 512 --conf 0.47 --device auto
   </tr>
 </table>
 
+### Примеры сегментации новой моделью
+
+Ниже показаны реальные предсказания `sonar_seg_v2_best.pt` на сонарных изображениях тестовой выборки: цветная область — предсказанная моделью маска, рамка и подпись показывают класс и confidence. Это несколько иллюстративных примеров; они не заменяют полные метрики и не гарантируют такое же качество на каждом кадре.
+
+<table>
+  <tr>
+    <th colspan="3">Box / Crate (предсказания сегментации)</th>
+  </tr>
+  <tr>
+    <td align="center"><img src="training/sonar_seg_v2_results/prediction_examples/box_crate_01.jpg" width="240" alt="Сегментация ящика новой моделью 1"><br><sub>Box/Crate · conf 0,80</sub></td>
+    <td align="center"><img src="training/sonar_seg_v2_results/prediction_examples/box_crate_02.jpg" width="240" alt="Сегментация ящика новой моделью 2"><br><sub>Box/Crate · conf 0,78</sub></td>
+    <td align="center"><img src="training/sonar_seg_v2_results/prediction_examples/box_crate_03.jpg" width="240" alt="Сегментация ящика новой моделью 3"><br><sub>Box/Crate · conf 0,82</sub></td>
+  </tr>
+  <tr>
+    <th colspan="3">Pipe (предсказания сегментации трубы)</th>
+  </tr>
+  <tr>
+    <td align="center"><img src="training/sonar_seg_v2_results/prediction_examples/pipe_01.jpg" width="240" alt="Сегментация трубы новой моделью 1"><br><sub>Pipe · conf 0,88</sub></td>
+    <td align="center"><img src="training/sonar_seg_v2_results/prediction_examples/pipe_02.jpg" width="240" alt="Сегментация трубы новой моделью 2"><br><sub>Pipe · conf 0,86</sub></td>
+    <td align="center"><img src="training/sonar_seg_v2_results/prediction_examples/pipe_03.jpg" width="240" alt="Сегментация трубы новой моделью 3"><br><sub>Pipe · conf 0,82</sub></td>
+  </tr>
+</table>
+
 Пути в `data.yaml` настроены относительно этой директории: `train/images`, `valid/images`, `test/images`. Если переместить набор отдельно после клонирования, обновите соответствующие пути.
 
 Набор экспортирован из **My First Project**, `nothingbeatyous-workspace`, version 2 на Roboflow Universe под лицензией CC BY 4.0: [страница набора version 2](https://universe.roboflow.com/nothingbeatyous-workspace/my-first-project-4vdi4/dataset/2). При повторном распространении сохраните сведения об источнике и соблюдайте требования атрибуции CC BY 4.0. Наличие полигональных меток не означает, что их качество прошло независимую проверку.

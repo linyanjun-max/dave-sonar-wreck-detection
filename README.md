@@ -174,6 +174,29 @@ bash ./run_sonar_yolo_realtime.sh --rate 1 --imgsz 512 --conf 0.47 --device auto
   </tr>
 </table>
 
+### 新模型分割识别样例
+
+以下是新版 `sonar_seg_v2_best.pt` 对测试集声呐图像的实际推理输出：彩色区域为模型预测的分割掩膜，边框和文字显示预测类别及置信度。示例均来自测试集；它们用于直观展示，不替代完整指标，也不代表每张图都能达到相同效果。
+
+<table>
+  <tr>
+    <th colspan="3">Box / Crate（模型分割预测）</th>
+  </tr>
+  <tr>
+    <td align="center"><img src="training/sonar_seg_v2_results/prediction_examples/box_crate_01.jpg" width="240" alt="新版模型箱体分割预测 1"><br><sub>Box/Crate · conf 0.80</sub></td>
+    <td align="center"><img src="training/sonar_seg_v2_results/prediction_examples/box_crate_02.jpg" width="240" alt="新版模型箱体分割预测 2"><br><sub>Box/Crate · conf 0.78</sub></td>
+    <td align="center"><img src="training/sonar_seg_v2_results/prediction_examples/box_crate_03.jpg" width="240" alt="新版模型箱体分割预测 3"><br><sub>Box/Crate · conf 0.82</sub></td>
+  </tr>
+  <tr>
+    <th colspan="3">Pipe（水下管道模型分割预测）</th>
+  </tr>
+  <tr>
+    <td align="center"><img src="training/sonar_seg_v2_results/prediction_examples/pipe_01.jpg" width="240" alt="新版模型管道分割预测 1"><br><sub>Pipe · conf 0.88</sub></td>
+    <td align="center"><img src="training/sonar_seg_v2_results/prediction_examples/pipe_02.jpg" width="240" alt="新版模型管道分割预测 2"><br><sub>Pipe · conf 0.86</sub></td>
+    <td align="center"><img src="training/sonar_seg_v2_results/prediction_examples/pipe_03.jpg" width="240" alt="新版模型管道分割预测 3"><br><sub>Pipe · conf 0.82</sub></td>
+  </tr>
+</table>
+
 `data.yaml` 的路径已调整为相对该目录的 `train/images`、`valid/images`、`test/images`，以便在克隆后的仓库中直接定位。若将数据集单独移动到其他目录，请据此更新 `data.yaml` 中的路径。
 
 此数据集由 Roboflow Universe 的 **My First Project**, `nothingbeatyous-workspace`, version 2 导出，许可为 CC BY 4.0：[version 2 数据集页面](https://universe.roboflow.com/nothingbeatyous-workspace/my-first-project-4vdi4/dataset/2)。再分发时请保留数据集内的来源说明，并遵守 CC BY 4.0 署名要求。包含分割标签不代表这些标签或模型已通过独立质量审查。
