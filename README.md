@@ -109,9 +109,9 @@ bash ./run_sonar_yolo_realtime.sh --rate 1 --imgsz 512 --conf 0.47 --device auto
 
 ## 模型与限制
 
-- 权重：[`models/shipwreck_seg_v1-5_best.pt`](models/shipwreck_seg_v1-5_best.pt)，YOLOv8 分割模型，类别只有 `shipwreck`。未检出沉船不等同于识别出一个明确的“背景类别”。
-- 第一阶段权重对应 version 1 训练数据；仓库现已附带 version 2 的完整标注数据集。两者均来自 Roboflow 项目，许可为 CC BY 4.0；见下方署名说明。
-- 这是基础实验模型，可能漏检或误检。测试前应在 RViz 中观察真实输出，不要将它视作安全/导航系统。
+- 默认权重：[`models/sonar_seg_v2_best.pt`](models/sonar_seg_v2_best.pt)，新版 YOLOv8 分割模型，类别为 `box_crate`、`pipe`、`shipwreck`。没有任何检测结果表示本帧未检出训练类别，不代表识别出了显式的“背景”类别。
+- 实时启动脚本默认使用这份三类模型；旧的 [`models/shipwreck_seg_v1-5_best.pt`](models/shipwreck_seg_v1-5_best.pt) 仍保留，可通过 `--model` 参数手动指定。完整 v2 训练结果与评估见 [`training/sonar_seg_v2_results/`](training/sonar_seg_v2_results/)。
+- 这是基础实验模型，尤其沉船类仍有漏检/误检，背景误报也需要继续验证。测试前应在 RViz 中观察真实输出，不要将它视作安全/导航系统。
 
 ## 第一阶段成果与声呐识别示例
 

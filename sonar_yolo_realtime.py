@@ -16,7 +16,7 @@ from ultralytics import YOLO
 
 
 ROOT = Path(__file__).resolve().parent
-DEFAULT_MODEL = ROOT / "models" / "shipwreck_seg_v1-5_best.pt"
+DEFAULT_MODEL = ROOT / "models" / "sonar_seg_v2_best.pt"
 
 
 def parse_args():
