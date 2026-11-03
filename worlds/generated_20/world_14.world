@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!-- 由 scripts/gen_world.py 自动生成，请勿手工编辑 -->
+<!-- world=ghw14_042002  seed=42002  objects=4 -->
+<sdf version="1.9">
+  <world name="ghw14_042002">
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics"/>
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands"/>
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster"/>
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+    <plugin filename="multibeam_sonar_system" name="custom::MultibeamSonarSystem"/>
+    <physics name="1ms" type="ignored">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+    <scene>
+      <ambient>0.25 0.30 0.35 1.0</ambient>
+      <background>0.02 0.05 0.09 1.0</background>
+      <shadows>0</shadows>
+    </scene>
+    <light type="directional" name="sun">
+      <cast_shadows>false</cast_shadows>
+      <pose>0 0 30 0 0 0</pose>
+      <diffuse>0.9 0.95 1.0 1</diffuse>
+      <specular>0.1 0.1 0.1 1</specular>
+      <direction>-0.2 -0.1 -1</direction>
+    </light>
+
+    <!-- ===== 基础地形：Fuel Sand Heightmap（沙丘），勿加 label => 恒为背景 0 ===== -->
+    <include>
+      <name>sand_heightmap</name>
+      <uri>model://sand_heightmap</uri>
+      <pose>0.000 0.000 -16.000 0.000 0.000 0.000</pose>
+      <static>true</static>
+    </include>
+
+    <!-- no_rig：未写入内置声呐平台。物体是围绕 (43.50, 43.90) 布置的，DAVE 的机器人请生成在这附近 -->
+
+    <!-- ===== 目标物体：z 由「足印内地形最高点」推出，保证不陷进沙丘 ===== -->
+    <!-- label=1 (shipwreck)  距离=19.88 m 方位=+0.0°  足印起伏=0.048 m -->
+    <include>
+      <name>objs01_sunken_ship_distorted</name>
+      <uri>model://sunken_ship_distorted</uri>
+      <pose>55.5471 28.0928 -15.5327 0 0 0.4290</pose>
+      <static>true</static>
+      <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>1</label></plugin>
+    </include>
+    <!-- label=9 (helmet)  距离=9.43 m 方位=+128.9°  足印起伏=0.175 m -->
+    <include>
+      <name>objs02_hardhat_ribbed</name>
+      <uri>model://hardhat_ribbed</uri>
+      <pose>45.7448 53.0619 -14.0091 0 0 -3.0209</pose>
+      <static>true</static>
+      <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>9</label></plugin>
+    </include>
+    <!-- label=12 (flight_recorder)  距离=16.03 m 方位=-82.7°  足印起伏=0.000 m -->
+    <include>
+      <name>objs03_flight_data_recorder</name>
+      <uri>model://flight_data_recorder</uri>
+      <pose>32.0871 32.6458 -15.9800 0 0 -2.7416</pose>
+      <static>true</static>
+      <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>12</label></plugin>
+    </include>
+    <!-- label=7 (uxo)  距离=6.79 m 方位=-20.3°  足印起伏=0.000 m -->
+    <include>
+      <name>objs04_unexploded_ordnance_a</name>
+      <uri>model://unexploded_ordnance_a</uri>
+      <pose>45.4794 37.4063 -14.1769 0 0 -1.9503</pose>
+      <static>true</static>
+      <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>7</label></plugin>
+    </include>
+
+  </world>
+</sdf>
