@@ -1,0 +1,225 @@
+name: gh03_041003
+seed: 41003
+terrain:
+  name: '1'
+  source: ~/.gz/fuel/fuel.gazebosim.org/hmoyen/models/sand heightmap/1/meshes/heightmap.dae
+  pose:
+  - 0.0
+  - 0.0
+  - -16.0
+  - 0.0
+  - 0.0
+  - 0.0
+rig:
+  x: 25.462284576819588
+  y: 4.120075649489744
+  z: -15.5
+  yaw: 0.47741761717604286
+  altitude: 0.5
+  terrain:
+    ok: true
+    z_min: -16.0
+    z_max: -16.0
+    z_mean: -16.0
+    relief: 0.0
+    slope_deg: 0.0
+placement:
+  region:
+  - 0.0
+  - 60.0
+  - -30.0
+  - 30.0
+  max_relief: 0.5
+  max_slope: 25.0
+  clearance: 0.02
+  min_sep: 1.5
+  az_limit: 180.0
+  min_range: 5.0
+  max_range: 20.0
+objects:
+- dir: sunken_ship_distorted
+  label: 1
+  class: shipwreck
+  x: 42.6700874081381
+  y: 13.022238933103715
+  z: -15.21943982875882
+  yaw: -1.9396275182917089
+  aabb_min:
+  - -8.1934
+  - -9.0967
+  - -0.3995
+  aabb_max:
+  - 9.2632
+  - 3.5389
+  - 6.813
+  terrain:
+    ok: true
+    z_min: -16.0
+    z_max: -15.638939828758819
+    z_mean: -15.996750565901264
+    relief: 0.3610601712411814
+    slope_deg: 18.39148665413461
+  range: 19.37413196532062
+  nearest_to_rig: 6.443725515173821
+  azimuth_deg: 0.0
+  obb:
+  - 39.8852251142158
+  - 13.525175533372401
+  - 8.7283
+  - 6.3178
+  - -1.9396275182917089
+- dir: drum_55gal
+  label: 3
+  class: barrel
+  x: 25.96636603161838
+  y: -1.160861454159991
+  z: -15.98
+  yaw: 0.5713638759547983
+  aabb_min:
+  - -1.2435
+  - -1.2435
+  - 0.0
+  aabb_max:
+  - 1.2435
+  - 1.2435
+  - 3.6063
+  terrain:
+    ok: true
+    z_min: -16.0
+    z_max: -16.0
+    z_mean: -16.0
+    relief: 0.0
+    slope_deg: 0.0
+  range: 5.304940603416453
+  nearest_to_rig: null
+  azimuth_deg: -111.90147851128947
+  obb:
+  - 25.96636603161838
+  - -1.160861454159991
+  - 1.2435
+  - 1.2435
+  - 0.5713638759547983
+- dir: hardhat_ribbed
+  label: 9
+  class: helmet
+  x: 30.901857328393284
+  y: 21.498465300406387
+  z: -14.1836
+  yaw: -1.5241194641272897
+  aabb_min:
+  - -1.8794
+  - -2.3671
+  - -1.7964
+  aabb_max:
+  - 1.8794
+  - 1.8752
+  - 1.8099
+  terrain:
+    ok: true
+    z_min: -16.0
+    z_max: -16.0
+    z_mean: -16.0
+    relief: 0.0
+    slope_deg: 0.0
+  range: 18.209815446037606
+  nearest_to_rig: null
+  azimuth_deg: 45.26545465429646
+  obb:
+  - 30.656175209012673
+  - 21.486989294278303
+  - 1.8794
+  - 2.12115
+  - -1.5241194641272897
+- dir: flight_data_recorder
+  label: 12
+  class: flight_recorder
+  x: 16.02972468473655
+  y: 17.48663916331236
+  z: -15.98
+  yaw: 2.9101877835636545
+  aabb_min:
+  - -1.4663
+  - -2.4113
+  - 0.0
+  aabb_max:
+  - 1.4663
+  - 2.3546
+  - 3.6063
+  terrain:
+    ok: true
+    z_min: -16.0
+    z_max: -16.0
+    z_mean: -16.0
+    relief: 0.0
+    slope_deg: 1.0177774980683254e-13
+  range: 16.359651777675086
+  nearest_to_rig: null
+  azimuth_deg: 97.85596351384703
+  obb:
+  - 16.036226620386678
+  - 17.514233498470173
+  - 1.4663
+  - 2.38295
+  - 2.9101877835636545
+- dir: unexploded_ordnance_a
+  label: 7
+  class: uxo
+  x: 17.001463561392512
+  y: 4.942108299424701
+  z: -14.1769
+  yaw: -1.8682077620334154
+  aabb_min:
+  - -7.7111
+  - -1.8031
+  - -1.8031
+  aabb_max:
+  - 6.4947
+  - 1.8031
+  - 1.8031
+  terrain:
+    ok: true
+    z_min: -16.0
+    z_max: -16.0
+    z_mean: -16.0
+    relief: 0.0
+    slope_deg: 0.0
+  range: 8.500660558606699
+  nearest_to_rig: null
+  azimuth_deg: 147.09668514835573
+  obb:
+  - 17.17969430217471
+  - 5.523607261625176
+  - 7.1029
+  - 1.8031
+  - -1.8682077620334154
+- dir: hardhat_standard
+  label: 9
+  class: helmet
+  x: 35.63177513162474
+  y: -4.771500459639443
+  z: -13.697316146311152
+  yaw: -1.763957951633125
+  aabb_min:
+  - -2.2015
+  - -2.2015
+  - -1.8031
+  aabb_max:
+  - 2.2015
+  - 2.2015
+  - 1.8031
+  terrain:
+    ok: true
+    z_min: -16.0
+    z_max: -15.520416146311153
+    z_mean: -15.890818195632825
+    relief: 0.4795838536888475
+    slope_deg: 14.2309045733091
+  range: 13.508466376636104
+  nearest_to_rig: null
+  azimuth_deg: -68.5184632943673
+  obb:
+  - 35.63177513162474
+  - -4.771500459639443
+  - 2.2015
+  - 2.2015
+  - -1.763957951633125

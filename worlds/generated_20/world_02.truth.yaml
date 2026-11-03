@@ -1,0 +1,163 @@
+name: gh02_041002
+seed: 41002
+terrain:
+  name: '1'
+  source: ~/.gz/fuel/fuel.gazebosim.org/hmoyen/models/sand heightmap/1/meshes/heightmap.dae
+  pose:
+  - 0.0
+  - 0.0
+  - -16.0
+  - 0.0
+  - 0.0
+  - 0.0
+rig:
+  x: 14.13522743750879
+  y: 18.12037541961842
+  z: -15.5
+  yaw: -1.3355752148824882
+  altitude: 0.5
+  terrain:
+    ok: true
+    z_min: -16.0
+    z_max: -16.0
+    z_mean: -16.0
+    relief: 0.0
+    slope_deg: 0.0
+placement:
+  region:
+  - 10.0
+  - 70.0
+  - -10.0
+  - 50.0
+  max_relief: 0.5
+  max_slope: 25.0
+  clearance: 0.02
+  min_sep: 1.5
+  az_limit: 180.0
+  min_range: 5.0
+  max_range: 18.0
+objects:
+- dir: sunken_ship_distorted
+  label: 1
+  class: shipwreck
+  x: 17.87326314766642
+  y: 2.5229680193882214
+  z: -15.5805
+  yaw: -3.0926644983944787
+  aabb_min:
+  - -8.1934
+  - -9.0967
+  - -0.3995
+  aabb_max:
+  - 9.2632
+  - 3.5389
+  - 6.813
+  terrain:
+    ok: true
+    z_min: -16.0
+    z_max: -16.0
+    z_mean: -16.0
+    relief: 0.0
+    slope_deg: 0.0
+  range: 16.03907817111599
+  nearest_to_rig: 6.664863531701089
+  azimuth_deg: 0.0
+  obb:
+  - 17.203091078557318
+  - 5.272381160003146
+  - 8.7283
+  - 6.3178
+  - -3.0926644983944787
+- dir: large_crate
+  label: 4
+  class: container
+  x: 20.733690440547747
+  y: 24.925513595709177
+  z: -15.9823
+  yaw: -2.9654165666174084
+  aabb_min:
+  - -3.9787
+  - -2.0883
+  - 0.0023
+  aabb_max:
+  - 3.9787
+  - 1.9946
+  - 3.6086
+  terrain:
+    ok: true
+    z_min: -16.0
+    z_max: -16.0
+    z_mean: -16.0
+    relief: 0.0
+    slope_deg: 1.0177774980683254e-13
+  range: 9.478903923880742
+  nearest_to_rig: null
+  azimuth_deg: 122.40621822453943
+  obb:
+  - 20.725479221843354
+  - 24.971638408851224
+  - 3.9787
+  - 2.0414499999999998
+  - -2.9654165666174084
+- dir: construction_barrel
+  label: 3
+  class: barrel
+  x: 24.640057031667837
+  y: 15.418132532623119
+  z: -15.98
+  yaw: 0.5735132504082179
+  aabb_min:
+  - -1.1864
+  - -1.1864
+  - 0.0
+  aabb_max:
+  - 1.1864
+  - 1.1864
+  - 3.6063
+  terrain:
+    ok: true
+    z_min: -16.0
+    z_max: -16.0
+    z_mean: -16.0
+    relief: 0.0
+    slope_deg: 0.0
+  range: 10.846822641798676
+  nearest_to_rig: null
+  azimuth_deg: 62.09692900067978
+  obb:
+  - 24.640057031667837
+  - 15.418132532623119
+  - 1.1864
+  - 1.1864
+  - 0.5735132504082179
+- dir: cable_spool
+  label: 5
+  class: cable_spool
+  x: 30.042112482739622
+  y: 20.556002766854334
+  z: -15.98
+  yaw: -0.08528899912659282
+  aabb_min:
+  - -3.0052
+  - -3.0052
+  - 0.0
+  aabb_max:
+  - 3.0052
+  - 3.0052
+  - 3.6063
+  terrain:
+    ok: true
+    z_min: -16.0
+    z_max: -16.0
+    z_mean: -16.0
+    relief: 0.0
+    slope_deg: 0.0
+  range: 16.092273686983816
+  nearest_to_rig: null
+  azimuth_deg: 85.2282144995902
+  obb:
+  - 30.042112482739622
+  - 20.556002766854334
+  - 3.0052
+  - 3.0052
+  - -0.08528899912659282

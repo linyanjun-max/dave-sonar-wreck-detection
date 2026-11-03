@@ -1,0 +1,225 @@
+name: ghw15_042003
+seed: 42003
+terrain:
+  name: '1'
+  source: ~/.gz/fuel/fuel.gazebosim.org/hmoyen/models/sand heightmap/1/meshes/heightmap.dae
+  pose:
+  - 0.0
+  - 0.0
+  - -16.0
+  - 0.0
+  - 0.0
+  - 0.0
+rig:
+  x: 30.530488833399936
+  y: -14.634435875305378
+  z: -15.5
+  yaw: 2.602133147339756
+  altitude: 0.5
+  terrain:
+    ok: true
+    z_min: -16.0
+    z_max: -16.0
+    z_mean: -16.0
+    relief: 0.0
+    slope_deg: 0.0
+placement:
+  region:
+  - 0.0
+  - 60.0
+  - -30.0
+  - 30.0
+  max_relief: 0.5
+  max_slope: 25.0
+  clearance: 0.02
+  min_sep: 1.5
+  az_limit: 180.0
+  min_range: 5.0
+  max_range: 20.0
+objects:
+- dir: sunken_ship_distorted
+  label: 1
+  class: shipwreck
+  x: 17.918605172277097
+  y: -7.083762177550128
+  z: -15.34446404145489
+  yaw: -2.155425062705816
+  aabb_min:
+  - -8.1934
+  - -9.0967
+  - -0.3995
+  aabb_max:
+  - 9.2632
+  - 3.5389
+  - 6.813
+  terrain:
+    ok: true
+    z_min: -16.0
+    z_max: -15.763964041454889
+    z_mean: -15.998049289598802
+    relief: 0.23603595854511106
+    slope_deg: 12.985565364489497
+  range: 14.699397360833204
+  nearest_to_rig: 11.145504619038475
+  azimuth_deg: 0.0
+  obb:
+  - 15.306027246124568
+  - -5.99617779012056
+  - 8.7283
+  - 6.3178
+  - -2.155425062705816
+- dir: flight_data_recorder
+  label: 12
+  class: flight_recorder
+  x: 25.781327666471817
+  y: -10.604624936671065
+  z: -15.98
+  yaw: 1.039219196855953
+  aabb_min:
+  - -1.4663
+  - -2.4113
+  - 0.0
+  aabb_max:
+  - 1.4663
+  - 2.3546
+  - 3.6063
+  terrain:
+    ok: true
+    z_min: -16.0
+    z_max: -16.0
+    z_mean: -16.0
+    relief: 0.0
+    slope_deg: 1.0177774980683254e-13
+  range: 6.228475575178473
+  nearest_to_rig: null
+  azimuth_deg: -9.40688789908134
+  obb:
+  - 25.8057656132878
+  - -10.618995366567875
+  - 1.4663
+  - 2.38295
+  - 1.039219196855953
+- dir: hardhat_standard
+  label: 9
+  class: helmet
+  x: 21.603762643008764
+  y: -17.061372404021952
+  z: -14.1769
+  yaw: 0.31251360277031504
+  aabb_min:
+  - -2.2015
+  - -2.2015
+  - -1.8031
+  aabb_max:
+  - 2.2015
+  - 2.2015
+  - 1.8031
+  terrain:
+    ok: true
+    z_min: -16.0
+    z_max: -16.0
+    z_mean: -16.0
+    relief: 0.0
+    slope_deg: 1.4393547412463824e-13
+  range: 9.250754639089426
+  nearest_to_rig: null
+  azimuth_deg: 46.118308298912666
+  obb:
+  - 21.603762643008764
+  - -17.061372404021952
+  - 2.2015
+  - 2.2015
+  - 0.31251360277031504
+- dir: hardhat_ribbed
+  label: 9
+  class: helmet
+  x: 38.69818338825493
+  y: 1.19516548275028
+  z: -13.845705057025732
+  yaw: 3.0142900025642705
+  aabb_min:
+  - -1.8794
+  - -2.3671
+  - -1.7964
+  aabb_max:
+  - 1.8794
+  - 1.8752
+  - 1.8099
+  terrain:
+    ok: true
+    z_min: -16.0
+    z_max: -15.662105057025732
+    z_mean: -15.969590851040508
+    relief: 0.3378949429742679
+    slope_deg: 12.624210533707728
+  range: 17.812566168196135
+  nearest_to_rig: null
+  azimuth_deg: -86.3838956205114
+  obb:
+  - 38.729408975411644
+  - 1.439125244200235
+  - 1.8794
+  - 2.12115
+  - 3.0142900025642705
+- dir: sonobuoy
+  label: 11
+  class: buoy
+  x: 23.06374448060281
+  y: 3.814168342717199
+  z: -14.2047
+  yaw: 1.8102104817773519
+  aabb_min:
+  - -0.2493
+  - -0.2521
+  - -1.7753
+  aabb_max:
+  - 0.2493
+  - 0.2493
+  - 1.8309
+  terrain:
+    ok: true
+    z_min: -16.0
+    z_max: -16.0
+    z_mean: -16.0
+    relief: 0.0
+    slope_deg: 0.0
+  range: 19.90234329980438
+  nearest_to_rig: null
+  azimuth_deg: -37.056482039998144
+  obb:
+  - 23.06510454849389
+  - 3.8145003296622164
+  - 0.2493
+  - 0.2507
+  - 1.8102104817773519
+- dir: large_crate
+  label: 4
+  class: container
+  x: 27.504056282712753
+  y: -21.73898840031794
+  z: -15.838973548838744
+  yaw: -2.18707776146793
+  aabb_min:
+  - -3.9787
+  - -2.0883
+  - 0.0023
+  aabb_max:
+  - 3.9787
+  - 1.9946
+  - 3.6086
+  terrain:
+    ok: true
+    z_min: -16.0
+    z_max: -15.856673548838744
+    z_mean: -15.997074970384462
+    relief: 0.14332645116125597
+    slope_deg: 13.318537694539263
+  range: 7.722302801918692
+  nearest_to_rig: null
+  azimuth_deg: 97.8354775343372
+  obb:
+  - 27.465825115962254
+  - -21.711908880586318
+  - 3.9787
+  - 2.0414499999999998
+  - -2.18707776146793

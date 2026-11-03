@@ -241,6 +241,86 @@ bash ./run_sonar_yolo_realtime.sh --rate 1 --imgsz 512 --conf 0.47 --device auto
 
 完整数据集推理视频 [sonar_seg_v2_dataset_review.mp4](training/sonar_seg_v2_results/sonar_seg_v2_dataset_review.mp4) 遍历了 1,119 张图像；按最高置信度预测类别随机排列，同一类别每段最多 20 帧，并包含背景/未检出段。统计与分段顺序见 [`sonar_seg_v2_dataset_review.json`](training/sonar_seg_v2_results/sonar_seg_v2_dataset_review.json)。背景/未检出是模型没有输出目标的结果，其中既有真实背景，也可能包含漏检。
 
+## 第三阶段：扩展声呐世界（20 个生成世界）
+
+前两个阶段都是“在给定场景里识别物体”。第三阶段把场景本身变成可批量生成的变量：用脚本在沙丘海床上自动布置沉船与多类小目标，本阶段生成了 20 个互不相同的世界。目的是扩充场景多样性、评测跨场景泛化，并为“一张声呐图里同时出现多个不同目标”的多类检测准备素材。
+
+20 个世界位于 [`worlds/generated_20/`](worlds/generated_20/)，每个世界一份 `.world` + 一份同名 `.truth.yaml` 真值，逐世界索引、标签表与已知限制见 [`worlds/generated_20/README.md`](worlds/generated_20/README.md)。
+
+### 生成流程
+
+| 步骤 | 做法 |
+|---|---|
+| 1. 地形 | 直接解析 Fuel `hmoyen/sand_heightmap` 的 COLLADA 网格（128×128 顶点、500×500 m、z 从 −16.0 到 +9.0），得到逐三角形的高度场，不依赖 SDF `<heightmap>` 的采样精度 |
+| 2. 选点 | 在 60×60 m 区域内按 ±180° 方位散开；每个候选点要求“物体足印内地形起伏 ≤ 0.5 m、坡度 ≤ 25°”，物体之间做 OBB 重叠检测，最近间距 ≥ 1.5 m |
+| 3. 贴地 | 每个物体的 z = 足印范围内地形最高点 + 2 cm 留白 − 模型 AABB 最低点，避免陷进沙丘或悬空 |
+| 4. 真值与标签 | 每个物体挂 `gz-sim-label-system` 输出语义分割真值；同时导出 `.truth.yaml`，记录类别、位姿、AABB/OBB、离出生点距离与方位 |
+
+每个世界固定包含 1 艘沉船，另有 3–5 个目标物，取自 11 种非沉船模型：货箱、施工桶、55 加仑桶、电缆盘、飞行记录仪、带筋安全帽、标准安全帽、声呐浮标、鱼雷、未爆弹。20 个世界的物体组合与 seed 两两不同。
+
+### 20 个世界一览
+
+<details>
+<summary>展开逐世界物体清单</summary>
+
+| # | seed | 物体 |
+|---:|---:|---|
+| 01 | 41001 | 沉船、货箱、油桶、未爆弹、安全帽 |
+| 02 | 41002 | 沉船、货箱、油桶、电缆盘 |
+| 03 | 41003 | 沉船、油桶、安全帽、飞行记录仪、未爆弹、安全帽 |
+| 04 | 41004 | 沉船、声呐浮标、电缆盘、货箱、飞行记录仪 |
+| 05 | 41005 | 沉船、安全帽、鱼雷、安全帽 |
+| 06 | 41006 | 沉船、货箱、飞行记录仪、油桶、安全帽、未爆弹 |
+| 07 | 41007 | 沉船、油桶、货箱、鱼雷、电缆盘 |
+| 08 | 41008 | 沉船、安全帽、声呐浮标、电缆盘 |
+| 09 | 41009 | 沉船、油桶、电缆盘、货箱、安全帽、未爆弹 |
+| 10 | 41010 | 沉船、油桶、安全帽、声呐浮标、油桶 |
+| 11 | 41011 | 沉船、鱼雷、飞行记录仪、电缆盘 |
+| 12 | 41012 | 沉船、鱼雷、安全帽、声呐浮标、电缆盘、油桶 |
+| 13 | 42001 | 沉船、未爆弹、声呐浮标、安全帽、鱼雷 |
+| 14 | 42002 | 沉船、安全帽、飞行记录仪、未爆弹 |
+| 15 | 42003 | 沉船、飞行记录仪、安全帽、安全帽、声呐浮标、货箱 |
+| 16 | 42004 | 沉船、鱼雷、油桶、油桶、安全帽 |
+| 17 | 42005 | 沉船、电缆盘、油桶、声呐浮标 |
+| 18 | 42006 | 沉船、未爆弹、飞行记录仪、电缆盘、油桶、鱼雷 |
+| 19 | 42007 | 沉船、油桶、安全帽、电缆盘、货箱 |
+| 20 | 42008 | 沉船、飞行记录仪、声呐浮标、未爆弹 |
+
+</details>
+
+### 生成世界的 Gazebo 画面
+
+以下四张是生成世界在 Gazebo 里的实机截图（GUI 截屏，非渲染图）。场景里可见沙丘海床、沉船网格与各类小目标，物体位置由上面的贴地规则算出：
+
+<table>
+  <tr>
+    <td align="center"><img src="docs/images/world-showcase-01.jpg" width="380" alt="生成世界截图 1"><br><sub>沉船 + 两顶安全帽 + 飞行记录仪 + 货箱</sub></td>
+    <td align="center"><img src="docs/images/world-showcase-02.jpg" width="380" alt="生成世界截图 2"><br><sub>沉船 + 鱼雷 + 未爆弹 + 声呐浮标</sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="docs/images/world-showcase-03.jpg" width="380" alt="生成世界截图 3"><br><sub>沉船 + 电缆盘 + 飞行记录仪 + 55 加仑桶</sub></td>
+    <td align="center"><img src="docs/images/world-showcase-04.jpg" width="380" alt="生成世界截图 4"><br><sub>沉船 + 两顶安全帽 + 货箱</sub></td>
+  </tr>
+</table>
+
+### 运行生成的世界
+
+世界用 `model://` 引用外部模型，缺模型会导致整个世界加载失败（`Unable to find uri[...]`）。因此需要 Fuel 上的 `hmoyen/sand_heightmap` 与前面列出的目标模型，以及 `multibeam_sonar_system` 插件：
+
+```bash
+export GZ_SIM_RESOURCE_PATH="$HOME/.gz/fuel:$GZ_SIM_RESOURCE_PATH"
+gz sim -r worlds/generated_20/world_01.world
+```
+
+世界文件本身**不含机器人**。要驾驶或采集声呐，请按真值文件 `rig` 段的位姿生成 BlueROV2（自带多波束声呐），或改为固定声呐平台；建议出生点已经写在每个 `.truth.yaml` 里。
+
+### 第三阶段的已知限制
+
+- 物体是静态的，只做偏航（yaw）旋转，不倾斜、不下沉、不与海床发生物理接触。
+- 生成时要求足印内起伏 ≤ 0.5 m、坡度 ≤ 25°，所以本批 20 个世界都落在沙丘地图 `x ≈ +10…+30 m` 的平坦盆地，`.truth.yaml` 里 `relief` 全部为 0。想要有起伏的场景，需要放宽这两个阈值重新生成。
+- 物理步长 1 ms（为声呐距离分辨率设），比 DAVE 官方海洋世界的 4 ms 更耗算力；叠加机器人 + ArduSub 后实时因子会明显下降，此时可调大步长或降低声呐更新率。
+- 目标库只有 11 种非沉船模型，类别多样性远少于真实海底；这些世界也不含训练数据与标注，声呐图像需要自行采集后再标注。
+
 ## 数据与第三方内容署名
 
 第一阶段模型基于 **My First Project** version 1 训练（Roboflow Universe，CC BY 4.0）：[version 1 数据集页面](https://universe.roboflow.com/nothingbeatyous-workspace/my-first-project-4vdi4/dataset/1)。第二阶段合并后的标注数据集为 version 2，已随仓库发布，见上方链接。依 CC BY 4.0 要求保留署名、许可链接并说明修改/衍生；若再分发数据或模型，请同时提供本说明。
@@ -249,4 +329,4 @@ bash ./run_sonar_yolo_realtime.sh --rate 1 --imgsz 512 --conf 0.47 --device auto
 
 ## 内容范围
 
-仓库包含运行脚本、世界/RViz 配置、实时识别代码、阶段模型权重、阶段性演示视频、第二阶段完整 YOLOv8 segmentation 数据集和新版模型训练结果。虚拟环境、RL 检查点和用户机器上的绝对路径配置不包含在内。
+仓库包含运行脚本、世界/RViz 配置、实时识别代码、阶段模型权重、阶段性演示视频、第二阶段完整 YOLOv8 segmentation 数据集、新版模型训练结果，以及第三阶段 20 个生成世界（[`worlds/generated_20/`](worlds/generated_20/)）。虚拟环境、RL 检查点和用户机器上的绝对路径配置不包含在内。

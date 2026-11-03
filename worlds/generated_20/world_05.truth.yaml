@@ -1,0 +1,163 @@
+name: gh05_041005
+seed: 41005
+terrain:
+  name: '1'
+  source: ~/.gz/fuel/fuel.gazebosim.org/hmoyen/models/sand heightmap/1/meshes/heightmap.dae
+  pose:
+  - 0.0
+  - 0.0
+  - -16.0
+  - 0.0
+  - 0.0
+  - 0.0
+rig:
+  x: 20.371471098719475
+  y: 14.740028012320112
+  z: -15.5
+  yaw: -1.7779980194835021
+  altitude: 0.5
+  terrain:
+    ok: true
+    z_min: -16.0
+    z_max: -16.0
+    z_mean: -16.0
+    relief: 0.0
+    slope_deg: 0.0
+placement:
+  region:
+  - 10.0
+  - 70.0
+  - -10.0
+  - 50.0
+  max_relief: 0.5
+  max_slope: 25.0
+  clearance: 0.02
+  min_sep: 1.5
+  az_limit: 180.0
+  min_range: 5.0
+  max_range: 18.0
+objects:
+- dir: sunken_ship_distorted
+  label: 1
+  class: shipwreck
+  x: 17.665450073502164
+  y: 1.8676221773712953
+  z: -15.5805
+  yaw: 0.5442754051983019
+  aabb_min:
+  - -8.1934
+  - -9.0967
+  - -0.3995
+  aabb_max:
+  - 9.2632
+  - 3.5389
+  - 6.813
+  terrain:
+    ok: true
+    z_min: -16.0
+    z_max: -16.0
+    z_mean: -16.0
+    relief: 0.0
+    slope_deg: 0.0
+  range: 13.153759225732486
+  nearest_to_rig: 6.072304889444208
+  azimuth_deg: 0.0
+  obb:
+  - 19.56196826216252
+  - -0.23276397285928896
+  - 8.7283
+  - 6.3178
+  - 0.5442754051983019
+- dir: hardhat_ribbed
+  label: 9
+  class: helmet
+  x: 34.79583064133022
+  y: 13.676927687570975
+  z: -14.1836
+  yaw: 0.3320104893562914
+  aabb_min:
+  - -1.8794
+  - -2.3671
+  - -1.7964
+  aabb_max:
+  - 1.8794
+  - 1.8752
+  - 1.8099
+  terrain:
+    ok: true
+    z_min: -16.0
+    z_max: -16.0
+    z_mean: -16.0
+    relief: 0.0
+    slope_deg: 0.0
+  range: 14.463482655121046
+  nearest_to_rig: null
+  azimuth_deg: 97.65660532048958
+  obb:
+  - 34.87599666165864
+  - 13.444409276074802
+  - 1.8794
+  - 2.12115
+  - 0.3320104893562914
+- dir: torpedo_mk48
+  label: 8
+  class: torpedo
+  x: 23.49120201755252
+  y: 29.592343502250895
+  z: -15.128
+  yaw: 2.205557610343665
+  aabb_min:
+  - -8.7372
+  - -0.852
+  - -0.852
+  aabb_max:
+  - 8.7194
+  - 0.852
+  - 0.852
+  terrain:
+    ok: true
+    z_min: -16.0
+    z_max: -16.0
+    z_mean: -16.0
+    relief: 0.0
+    slope_deg: 0.0
+  range: 15.176428974510465
+  nearest_to_rig: null
+  azimuth_deg: -179.99074795700483
+  obb:
+  - 23.49647958684354
+  - 29.58517710410549
+  - 8.7283
+  - 0.852
+  - 2.205557610343665
+- dir: hardhat_standard
+  label: 9
+  class: helmet
+  x: 11.729902195944938
+  y: 10.643132982781374
+  z: -14.1769
+  yaw: 0.30921318605433257
+  aabb_min:
+  - -2.2015
+  - -2.2015
+  - -1.8031
+  aabb_max:
+  - 2.2015
+  - 2.2015
+  - 1.8031
+  terrain:
+    ok: true
+    z_min: -16.0
+    z_max: -16.0
+    z_mean: -16.0
+    relief: 0.0
+    slope_deg: 0.0
+  range: 9.563538151984293
+  nearest_to_rig: null
+  azimuth_deg: -52.76298148973889
+  obb:
+  - 11.729902195944938
+  - 10.643132982781374
+  - 2.2015
+  - 2.2015
+  - 0.30921318605433257

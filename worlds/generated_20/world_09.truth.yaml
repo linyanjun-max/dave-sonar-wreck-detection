@@ -1,0 +1,225 @@
+name: gh09_041009
+seed: 41009
+terrain:
+  name: '1'
+  source: ~/.gz/fuel/fuel.gazebosim.org/hmoyen/models/sand heightmap/1/meshes/heightmap.dae
+  pose:
+  - 0.0
+  - 0.0
+  - -16.0
+  - 0.0
+  - 0.0
+  - 0.0
+rig:
+  x: 37.26122941026782
+  y: 19.22407024995109
+  z: -15.5
+  yaw: 0.10780990921367607
+  altitude: 0.5
+  terrain:
+    ok: true
+    z_min: -16.0
+    z_max: -16.0
+    z_mean: -16.0
+    relief: 0.0
+    slope_deg: 0.0
+placement:
+  region:
+  - 0.0
+  - 60.0
+  - -30.0
+  - 30.0
+  max_relief: 0.5
+  max_slope: 25.0
+  clearance: 0.02
+  min_sep: 1.5
+  az_limit: 180.0
+  min_range: 5.0
+  max_range: 20.0
+objects:
+- dir: sunken_ship_distorted
+  label: 1
+  class: shipwreck
+  x: 53.051769661786054
+  y: 20.93307333138341
+  z: -15.5805
+  yaw: 1.720614707263791
+  aabb_min:
+  - -8.1934
+  - -9.0967
+  - -0.3995
+  aabb_max:
+  - 9.2632
+  - 3.5389
+  - 6.813
+  terrain:
+    ok: true
+    z_min: -16.0
+    z_max: -16.0
+    z_mean: -16.0
+    relief: 0.0
+    slope_deg: 0.0
+  range: 15.88275331821163
+  nearest_to_rig: 12.329841139050247
+  azimuth_deg: 0.0
+  obb:
+  - 55.71970258842046
+  - 21.876756074141788
+  - 8.7283
+  - 6.3178
+  - 1.720614707263791
+- dir: drum_55gal
+  label: 3
+  class: barrel
+  x: 33.12415124806441
+  y: 14.821225025526797
+  z: -15.98
+  yaw: -0.9327672705739767
+  aabb_min:
+  - -1.2435
+  - -1.2435
+  - 0.0
+  aabb_max:
+  - 1.2435
+  - 1.2435
+  - 3.6063
+  terrain:
+    ok: true
+    z_min: -16.0
+    z_max: -16.0
+    z_mean: -16.0
+    relief: 0.0
+    slope_deg: 0.0
+  range: 6.0415612047231795
+  nearest_to_rig: null
+  azimuth_deg: -139.39455225058896
+  obb:
+  - 33.12415124806441
+  - 14.821225025526797
+  - 1.2435
+  - 1.2435
+  - -0.9327672705739767
+- dir: cable_spool
+  label: 5
+  class: cable_spool
+  x: 33.889417441975674
+  y: 28.122451072884367
+  z: -15.98
+  yaw: -1.6792381698517516
+  aabb_min:
+  - -3.0052
+  - -3.0052
+  - 0.0
+  aabb_max:
+  - 3.0052
+  - 3.0052
+  - 3.6063
+  terrain:
+    ok: true
+    z_min: -16.0
+    z_max: -16.0
+    z_mean: -16.0
+    relief: 0.0
+    slope_deg: 0.0
+  range: 9.515791991183123
+  nearest_to_rig: null
+  azimuth_deg: 104.57585850933305
+  obb:
+  - 33.889417441975674
+  - 28.122451072884367
+  - 3.0052
+  - 3.0052
+  - -1.6792381698517516
+- dir: large_crate
+  label: 4
+  class: container
+  x: 41.98101873521099
+  y: 27.483406495008147
+  z: -15.9823
+  yaw: -1.73623493528325
+  aabb_min:
+  - -3.9787
+  - -2.0883
+  - 0.0023
+  aabb_max:
+  - 3.9787
+  - 1.9946
+  - 3.6086
+  terrain:
+    ok: true
+    z_min: -16.0
+    z_max: -16.0
+    z_mean: -16.0
+    relief: 0.0
+    slope_deg: 1.1379098358252182e-13
+  range: 9.512783319342486
+  nearest_to_rig: null
+  azimuth_deg: 54.07718415889167
+  obb:
+  - 41.9348084148977
+  - 27.491121985695283
+  - 3.9787
+  - 2.0414499999999998
+  - -1.73623493528325
+- dir: hardhat_ribbed
+  label: 9
+  class: helmet
+  x: 34.013833698023774
+  y: 6.651237892923783
+  z: -14.1836
+  yaw: 1.1055822139301936
+  aabb_min:
+  - -1.8794
+  - -2.3671
+  - -1.7964
+  aabb_max:
+  - 1.8794
+  - 1.8752
+  - 1.8099
+  terrain:
+    ok: true
+    z_min: -16.0
+    z_max: -16.0
+    z_mean: -16.0
+    relief: 0.0
+    slope_deg: 0.0
+  range: 12.985441555442536
+  nearest_to_rig: null
+  azimuth_deg: -110.65928300589289
+  obb:
+  - 34.23364549262619
+  - 6.540901237846397
+  - 1.8794
+  - 2.12115
+  - 1.1055822139301936
+- dir: unexploded_ordnance_a
+  label: 7
+  class: uxo
+  x: 24.457512230802486
+  y: 19.99993513160189
+  z: -14.1769
+  yaw: -1.3215267648680507
+  aabb_min:
+  - -7.7111
+  - -1.8031
+  - -1.8031
+  aabb_max:
+  - 6.4947
+  - 1.8031
+  - 1.8031
+  terrain:
+    ok: true
+    z_min: -16.0
+    z_max: -16.0
+    z_mean: -16.0
+    relief: 0.0
+    slope_deg: 0.0
+  range: 12.8272031217376
+  nearest_to_rig: null
+  azimuth_deg: 170.35524396403628
+  obb:
+  - 24.307471624590466
+  - 20.589337419082632
+  - 7.1029
+  - 1.8031
+  - -1.3215267648680507

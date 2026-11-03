@@ -1,0 +1,163 @@
+name: ghw20_042008
+seed: 42008
+terrain:
+  name: '1'
+  source: ~/.gz/fuel/fuel.gazebosim.org/hmoyen/models/sand heightmap/1/meshes/heightmap.dae
+  pose:
+  - 0.0
+  - 0.0
+  - -16.0
+  - 0.0
+  - 0.0
+  - 0.0
+rig:
+  x: 18.313469109485894
+  y: 12.240204631756818
+  z: -15.5
+  yaw: 0.8374574085644497
+  altitude: 0.5
+  terrain:
+    ok: true
+    z_min: -16.0
+    z_max: -16.0
+    z_mean: -16.0
+    relief: 0.0
+    slope_deg: 0.0
+placement:
+  region:
+  - 10.0
+  - 70.0
+  - -10.0
+  - 50.0
+  max_relief: 0.5
+  max_slope: 25.0
+  clearance: 0.02
+  min_sep: 1.5
+  az_limit: 180.0
+  min_range: 5.0
+  max_range: 18.0
+objects:
+- dir: sunken_ship_distorted
+  label: 1
+  class: shipwreck
+  x: 31.98399138093451
+  y: 27.413681735519916
+  z: -15.5805
+  yaw: 2.0206369140799874
+  aabb_min:
+  - -8.1934
+  - -9.0967
+  - -0.3995
+  aabb_max:
+  - 9.2632
+  - 3.5389
+  - 6.813
+  terrain:
+    ok: true
+    z_min: -16.0
+    z_max: -16.0
+    z_mean: -16.0
+    relief: 0.0
+    slope_deg: 0.0
+  range: 20.423456773832278
+  nearest_to_rig: 15.36939135818555
+  azimuth_deg: 0.0
+  obb:
+  - 34.253850207875736
+  - 29.103694790427184
+  - 8.7283
+  - 6.3178
+  - 2.0206369140799874
+- dir: flight_data_recorder
+  label: 12
+  class: flight_recorder
+  x: 30.455675624720378
+  y: 3.0895893632942677
+  z: -15.98
+  yaw: 1.193310926502563
+  aabb_min:
+  - -1.4663
+  - -2.4113
+  - 0.0
+  aabb_max:
+  - 1.4663
+  - 2.3546
+  - 3.6063
+  terrain:
+    ok: true
+    z_min: -16.0
+    z_max: -16.0
+    z_mean: -16.0
+    relief: 0.0
+    slope_deg: 1.1379098358252182e-13
+  range: 15.204175046677893
+  nearest_to_rig: null
+  azimuth_deg: -84.98520188686335
+  obb:
+  - 30.482029626386407
+  - 3.0791400046447195
+  - 1.4663
+  - 2.38295
+  - 1.193310926502563
+- dir: sonobuoy
+  label: 11
+  class: buoy
+  x: 15.644246868342707
+  y: 18.45389619369089
+  z: -14.2047
+  yaw: -2.6096598427996964
+  aabb_min:
+  - -0.2493
+  - -0.2521
+  - -1.7753
+  aabb_max:
+  - 0.2493
+  - 0.2493
+  - 1.8309
+  terrain:
+    ok: true
+    z_min: -16.0
+    z_max: -16.0
+    z_mean: -16.0
+    relief: 0.0
+    slope_deg: 8.142219984546603e-13
+  range: 6.762744280206384
+  nearest_to_rig: null
+  azimuth_deg: 65.26418650335461
+  obb:
+  - 15.643536788288516
+  - 18.45510275339378
+  - 0.2493
+  - 0.2507
+  - -2.6096598427996964
+- dir: unexploded_ordnance_a
+  label: 7
+  class: uxo
+  x: 25.705285909339484
+  y: 10.672766626593125
+  z: -14.1769
+  yaw: 0.4438117437798117
+  aabb_min:
+  - -7.7111
+  - -1.8031
+  - -1.8031
+  aabb_max:
+  - 6.4947
+  - 1.8031
+  - 1.8031
+  terrain:
+    ok: true
+    z_min: -16.0
+    z_max: -16.0
+    z_mean: -16.0
+    relief: 0.0
+    slope_deg: 2.0355549961366507e-13
+  range: 7.556177439858682
+  nearest_to_rig: null
+  azimuth_deg: -59.95502707771132
+  obb:
+  - 25.156007399471886
+  - 10.411614642879364
+  - 7.1029
+  - 1.8031
+  - 0.4438117437798117

@@ -1,0 +1,225 @@
+name: ghw18_042006
+seed: 42006
+terrain:
+  name: '1'
+  source: ~/.gz/fuel/fuel.gazebosim.org/hmoyen/models/sand heightmap/1/meshes/heightmap.dae
+  pose:
+  - 0.0
+  - 0.0
+  - -16.0
+  - 0.0
+  - 0.0
+  - 0.0
+rig:
+  x: 51.19329453350877
+  y: 19.831150704968543
+  z: -15.5
+  yaw: 2.6822270175594256
+  altitude: 0.5
+  terrain:
+    ok: true
+    z_min: -16.0
+    z_max: -16.0
+    z_mean: -16.0
+    relief: 0.0
+    slope_deg: 0.0
+placement:
+  region:
+  - 0.0
+  - 60.0
+  - -30.0
+  - 30.0
+  max_relief: 0.5
+  max_slope: 25.0
+  clearance: 0.02
+  min_sep: 1.5
+  az_limit: 180.0
+  min_range: 5.0
+  max_range: 20.0
+objects:
+- dir: sunken_ship_distorted
+  label: 1
+  class: shipwreck
+  x: 33.05260960677732
+  y: 28.804602614376023
+  z: -15.5805
+  yaw: 1.9556394407314306
+  aabb_min:
+  - -8.1934
+  - -9.0967
+  - -0.3995
+  aabb_max:
+  - 9.2632
+  - 3.5389
+  - 6.813
+  terrain:
+    ok: true
+    z_min: -16.0
+    z_max: -16.0
+    z_mean: -16.0
+    relief: 0.0
+    slope_deg: 0.0
+  range: 20.238757095765305
+  nearest_to_rig: 8.184637351189986
+  azimuth_deg: 0.0
+  obb:
+  - 35.427444668035484
+  - 30.343615821537977
+  - 8.7283
+  - 6.3178
+  - 1.9556394407314306
+- dir: unexploded_ordnance_a
+  label: 7
+  class: uxo
+  x: 51.95864505003177
+  y: 30.523829725608568
+  z: -14.1769
+  yaw: 1.9754322444696024
+  aabb_min:
+  - -7.7111
+  - -1.8031
+  - -1.8031
+  aabb_max:
+  - 6.4947
+  - 1.8031
+  - 1.8031
+  terrain:
+    ok: true
+    z_min: -16.0
+    z_max: -16.0
+    z_mean: -16.0
+    relief: 0.0
+    slope_deg: 0.0
+  range: 10.720034797125303
+  nearest_to_rig: null
+  azimuth_deg: -67.77436901428474
+  obb:
+  - 52.198083722890715
+  - 29.964744435210452
+  - 7.1029
+  - 1.8031
+  - 1.9754322444696024
+- dir: flight_data_recorder
+  label: 12
+  class: flight_recorder
+  x: 35.27421430214282
+  y: 12.551279025492377
+  z: -15.98
+  yaw: -0.839707372145531
+  aabb_min:
+  - -1.4663
+  - -2.4113
+  - 0.0
+  aabb_max:
+  - 1.4663
+  - 2.3546
+  - 3.6063
+  terrain:
+    ok: true
+    z_min: -16.0
+    z_max: -16.0
+    z_mean: -16.0
+    relief: 0.0
+    slope_deg: 0.0
+  range: 17.504675006474848
+  nearest_to_rig: null
+  azimuth_deg: 50.89455745721273
+  obb:
+  - 35.25310920786682
+  - 12.532350277630963
+  - 1.4663
+  - 2.38295
+  - -0.839707372145531
+- dir: cable_spool
+  label: 5
+  class: cable_spool
+  x: 49.34456022807082
+  y: 11.641624519322995
+  z: -15.87421983352461
+  yaw: -0.2007615374473346
+  aabb_min:
+  - -3.0052
+  - -3.0052
+  - 0.0
+  aabb_max:
+  - 3.0052
+  - 3.0052
+  - 3.6063
+  terrain:
+    ok: true
+    z_min: -16.0
+    z_max: -15.894219833524609
+    z_mean: -15.99706166204235
+    relief: 0.10578016647539101
+    slope_deg: 7.093840412097093
+  range: 8.395603473096932
+  nearest_to_rig: null
+  azimuth_deg: 103.59877511395968
+  obb:
+  - 49.34456022807082
+  - 11.641624519322995
+  - 3.0052
+  - 3.0052
+  - -0.2007615374473346
+- dir: drum_55gal
+  label: 3
+  class: barrel
+  x: 40.66394925436897
+  y: 17.39866590030499
+  z: -15.98
+  yaw: 1.0075555970335346
+  aabb_min:
+  - -1.2435
+  - -1.2435
+  - 0.0
+  aabb_max:
+  - 1.2435
+  - 1.2435
+  - 3.6063
+  terrain:
+    ok: true
+    z_min: -16.0
+    z_max: -16.0
+    z_mean: -16.0
+    relief: 0.0
+    slope_deg: 0.0
+  range: 10.806668974862818
+  nearest_to_rig: null
+  azimuth_deg: 39.32794632399185
+  obb:
+  - 40.66394925436897
+  - 17.39866590030499
+  - 1.2435
+  - 1.2435
+  - 1.0075555970335346
+- dir: torpedo_mk48
+  label: 8
+  class: torpedo
+  x: 61.46896644809099
+  y: 22.844017321049172
+  z: -15.07095612695677
+  yaw: 0.7285824921836537
+  aabb_min:
+  - -8.7372
+  - -0.852
+  - -0.852
+  aabb_max:
+  - 8.7194
+  - 0.852
+  - 0.852
+  terrain:
+    ok: true
+    z_min: -16.0
+    z_max: -15.94295612695677
+    z_mean: -15.99842494800919
+    relief: 0.057043873043230775
+    slope_deg: 3.8756170691350174
+  range: 10.708258427140565
+  nearest_to_rig: null
+  azimuth_deg: -137.33894731272486
+  obb:
+  - 61.46232598946893
+  - 22.838091588243117
+  - 8.7283
+  - 0.852
+  - 0.7285824921836537
