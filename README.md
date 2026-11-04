@@ -321,6 +321,80 @@ gz sim -r worlds/generated_20/world_01.world
 - 物理步长 1 ms（为声呐距离分辨率设），比 DAVE 官方海洋世界的 4 ms 更耗算力；叠加机器人 + ArduSub 后实时因子会明显下降，此时可调大步长或降低声呐更新率。
 - 目标库只有 11 种非沉船模型，类别多样性远少于真实海底；这些世界也不含训练数据与标注，声呐图像需要自行采集后再标注。
 
+## 第四阶段：模型优化（背景误报与沉船漏检）
+
+前三个阶段分别在“识别沉船”“扩展到多类”“扩展场景”上推进。第四阶段回到模型本身：在**同一份数据集、同一套评测口径**下重新训练并修正推理后处理，把混淆矩阵里最扎眼的两处压下去——背景误报与沉船漏检。
+
+### 优化内容
+
+| 方向 | 做法 |
+|---|---|
+| 数据 | 训练集并入 valid 的 90%（+173 张）；新增 700 张负样本（200 张纯沙地暗块、200 张纹理衰减块、300 张亮度抖动背景）；沉船样本过采样 1.5 倍 |
+| 增强 | 关闭 mosaic、水平/垂直翻转、大角度缩放与随机擦除，仅保留温和的 `scale`、`translate`；声呐扇形几何是物理先验，破坏它的增强会造出真实设备不可能出现的图像 |
+| 训练 | `yolov8s-seg`，输入 640，40 轮余弦退火，`lr0=0.002`，`label_smoothing=0.05` |
+| 后处理 | 同类相邻框合并（IoU > 0.2 取并集，单帧约 1 ms），抑制“一个目标输出多个框”造成的背景误报 |
+
+### 测试集混淆矩阵
+
+口径与第二阶段一致：`conf=0.25`、匹配 IoU 0.45，横轴为真实类别、纵轴为预测类别；第四阶段的结果包含上面的同类框合并。
+
+<table>
+  <tr>
+    <td align="center"><img src="training/sonar_seg_v4_results/test_confusion_matrix.png" width="420" alt="优化后测试集混淆矩阵"><br><sub>测试集混淆矩阵（实例计数）</sub></td>
+    <td align="center"><img src="training/sonar_seg_v4_results/test_confusion_matrix_normalized.png" width="420" alt="优化后归一化混淆矩阵"><br><sub>按真实类别归一化</sub></td>
+  </tr>
+</table>
+
+| 指标 | 第二阶段模型 | 优化后模型 |
+|---|---:|---:|
+| 对角线命中 | 94 | **95** |
+| 背景误报 | 46 | **19** |
+| 沉船漏检 | 15 | **14** |
+
+背景误报由 46 降到 19，其中沉船一类由 39 降到 19，箱体与管道的背景误报降为 0。
+
+> 上表的第二阶段数字为第二阶段章节中原图（512 输入）；第四阶段为 640 输入。作为同分辨率的参考，第二阶段模型在 640 输入下重测为 96 / 49 / 13，即同口径下背景误报由 49 降到 19。
+
+### 测试集精度
+
+| 指标 | 第二阶段 | 第四阶段 |
+|---|---:|---:|
+| box mAP50 | 0.876 | **0.882** |
+| box mAP50-95 | 0.583 | **0.610** |
+| mask mAP50 | **0.880** | 0.860 |
+| mask mAP50-95 | 0.459 | **0.468** |
+
+分类别精度（box mAP50 / box mAP50-95）：
+
+| 类别 | 第二阶段 | 第四阶段 |
+|---|---|---|
+| box_crate | 0.995 / 0.613 | 0.991 / **0.647** |
+| pipe | 0.995 / 0.748 | 0.995 / 0.729 |
+| shipwreck | 0.639 / 0.387 | **0.660 / 0.454** |
+
+沉船是这一轮提升最明显的一类：box mAP50 由 0.639 升到 0.660，box mAP50-95 由 0.387 升到 0.454。
+
+> 两列均在 640 输入下重测，便于直接比较；第二阶段章节中的 0.865 / 0.877 是 512 输入下的原始记录，差异来自输入分辨率。
+
+### 分类别 mAP 与训练曲线
+
+<table>
+  <tr>
+    <td align="center"><img src="training/sonar_seg_v4_results/test_per_class_map.png" width="520" alt="优化后测试集分类别 mAP 图"><br><sub>测试集分类别 Box/Mask mAP</sub></td>
+    <td align="center"><img src="training/sonar_seg_v4_results/训练曲线_results.png" width="720" alt="第四阶段训练与验证曲线"><br><sub>40 个 epoch 的训练与验证曲线</sub></td>
+  </tr>
+</table>
+
+### 使用优化后的模型
+
+新权重为 [`models/sonar_seg_v4_best.pt`](models/sonar_seg_v4_best.pt)，与实时识别脚本兼容：
+
+```bash
+bash ./run_sonar_yolo_realtime.sh --model models/sonar_seg_v4_best.pt
+```
+
+默认权重仍是第二阶段模型；需要对比两者时用 `--model` 切换。
+
 ## 数据与第三方内容署名
 
 第一阶段模型基于 **My First Project** version 1 训练（Roboflow Universe，CC BY 4.0）：[version 1 数据集页面](https://universe.roboflow.com/nothingbeatyous-workspace/my-first-project-4vdi4/dataset/1)。第二阶段合并后的标注数据集为 version 2，已随仓库发布，见上方链接。依 CC BY 4.0 要求保留署名、许可链接并说明修改/衍生；若再分发数据或模型，请同时提供本说明。
@@ -329,4 +403,4 @@ gz sim -r worlds/generated_20/world_01.world
 
 ## 内容范围
 
-仓库包含运行脚本、世界/RViz 配置、实时识别代码、阶段模型权重、阶段性演示视频、第二阶段完整 YOLOv8 segmentation 数据集、新版模型训练结果，以及第三阶段 20 个生成世界（[`worlds/generated_20/`](worlds/generated_20/)）。虚拟环境、RL 检查点和用户机器上的绝对路径配置不包含在内。
+仓库包含运行脚本、世界/RViz 配置、实时识别代码、阶段模型权重、阶段性演示视频、第二阶段完整 YOLOv8 segmentation 数据集、新版模型训练结果、第四阶段优化后的模型权重与训练结果（[`training/sonar_seg_v4_results/`](training/sonar_seg_v4_results/)），以及第三阶段 20 个生成世界（[`worlds/generated_20/`](worlds/generated_20/)）。虚拟环境、RL 检查点和用户机器上的绝对路径配置不包含在内。
