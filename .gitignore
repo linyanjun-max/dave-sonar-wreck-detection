@@ -7,3 +7,7 @@ logs/
 *.db3
 *.mcap
 *.bag
+
+# Ultralytics dataset caches (regenerated on first run)
+*.cache
+runs/
